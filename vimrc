@@ -26,6 +26,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'luochen1990/rainbow'
     " Combine with netrw
     Plug 'tpope/vim-vinegar'
+    " The React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
+    Plug 'maxmellon/vim-jsx-pretty'
+    " Display the indention levels with thin vertical lines
+    Plug 'Yggdroot/indentLine'
 
 " Initialize plugin system
 call plug#end()
@@ -324,7 +328,8 @@ au FocusGained,BufEnter * :checktime
 
 "============== Terminal ============== "
 set splitbelow
-noremap <Leader>t :ter ++rows=13<CR>
+noremap <Leader>t :e term://bash<CR>
+tnoremap <Esc> <C-\><C-n>
 
 " ============== Skin ============== "
 syntax on
