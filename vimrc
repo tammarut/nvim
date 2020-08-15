@@ -30,6 +30,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " gruvbox skins
     Plug 'morhetz/gruvbox'
+    " Git wrapper
+    Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
 call plug#end()
@@ -192,7 +194,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{FugitiveStatusline()}
 
 " Mappings for CoCList
 " Show all diagnostics.
@@ -302,7 +304,7 @@ let g:gitgutter_enabled = 1
 " ============== Vim airline ============== "
 set t_Co=256
 let g:airline_powerline_fonts = 1
-let g:airline_theme='cool'
+let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
