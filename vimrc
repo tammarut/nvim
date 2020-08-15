@@ -18,32 +18,54 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
     Plug 'pangloss/vim-javascript'
-    " post install (yarn install | npm install) then load plugin only for editing supported files
-    Plug 'prettier/vim-prettier', {
-      \ 'do': 'yarn install',
-      \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+    " post instalyaryarnnl (yarn install | npm install) then load plugin only for editing supported files
+    Plug 'prettier/vim-prettier', { 'do': 'npm install' }
     " Rainbow Parentheses
     Plug 'luochen1990/rainbow'
     " Combine with netrw
     Plug 'tpope/vim-vinegar'
     " The React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
     Plug 'maxmellon/vim-jsx-pretty'
-    " Display the indention levels with thin vertical lines
-    Plug 'Yggdroot/indentLine'
+    " Auto close (X)HTML tags
+    Plug 'alvan/vim-closetag'
+    " gruvbox skins
+    Plug 'morhetz/gruvbox'
 
 " Initialize plugin system
 call plug#end()
 
+" —————————— vim-closetag ——————————
+" filenames like *.xml, *.html, *.xhtml, ...
+" " These are the file extensions where this plugin is enabled.
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.jsx"
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 
-" ——————————— HTML ———————————
-" HTML syntax highlight
-autocmd BufNewFile,BufRead *.ezt set filetype=html
-" ></                insert '></'
-" <C-x><C-o><C-y>    use the built-in omni-completion to finish the closing tag
-" <C-o>%             move the cursor to the beginning of your closing tag
-" <CR>               insert a newline to push the closing tag on its own line
-" <C-o>O             open a new line above the current line
-inoremap <buffer> > ></<C-x><C-o><C-y><C-o>%<CR><C-o>O
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+let g:closetag_filetypes = 'html,xhtml,phtml'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+
+" Add > at current position without closing the current tag, default is ''
+let g:closetag_close_shortcut = '<leader>>'
+set iskeyword+=<,>
+iab <h1> <lt>h1> <lt>/h1><esc>5ha
+inoremap <buffer> <C-s> <esc>yiwi<lt><esc>ea></><esc>hpF>i
 
 " ——————————— Coc(Conquer of Completion) ———————————
 let g:coc_disable_startup_warning = 1
@@ -275,11 +297,12 @@ highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
 let g:gitgutter_enabled = 1
+"let g:gitgutter_highlight_linenrs = 1 " turn on line number highlight"
 
 " ============== Vim airline ============== "
 set t_Co=256
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
+let g:airline_theme='cool'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -329,7 +352,7 @@ au FocusGained,BufEnter * :checktime
 "============== Terminal ============== "
 set splitbelow
 noremap <Leader>t :e term://bash<CR>
-tnoremap <Esc> <C-\><C-n>
+tnoremap hh <C-\><C-n>
 
 " ============== Skin ============== "
 syntax on
@@ -388,7 +411,7 @@ endfunction
 function! NetrwMappings()
         " Hack fix to make ctrl-l work properly
         noremap <buffer> <C-l> <C-w>l
-        noremap <silent> <C-b> :call ToggleNetrw()<CR>
+        noremap <silent> <A-b> :call ToggleNetrw()<CR>
         noremap <buffer> V :call OpenToRight()<cr>
         noremap <buffer> H :call OpenToBelow()<cr>
 endfunction
