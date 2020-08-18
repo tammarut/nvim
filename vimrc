@@ -32,6 +32,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'morhetz/gruvbox'
     " Git wrapper
     Plug 'tpope/vim-fugitive'
+    " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
+    Plug 'tpope/vim-commentary'
 
 " Initialize plugin system
 call plug#end()
@@ -39,35 +41,7 @@ call plug#end()
 " —————————— vim-closetag ——————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " " These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.jsx"
-" filenames like *.xml, *.xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-
-" filetypes like xml, html, xhtml, ...
-" These are the file types where this plugin is enabled.
-let g:closetag_filetypes = 'html,xhtml,phtml'
-
-" filetypes like xml, xhtml, ...
-" This will make the list of non-closing tags self-closing in the specified files.
-let g:closetag_xhtml_filetypes = 'xhtml,jsx'
-
-" integer value [0|1]
-" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-let g:closetag_emptyTags_caseSensitive = 1
-
-" dict
-" Disables auto-close if not in a "valid" region (based on filetype)
-let g:closetag_regions = {
-    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-    \ 'javascript.jsx': 'jsxRegion',
-    \ }
-
-" Add > at current position without closing the current tag, default is ''
-let g:closetag_close_shortcut = '<leader>>'
-set iskeyword+=<,>
-iab <h1> <lt>h1> <lt>/h1><esc>5ha
-inoremap <buffer> <C-s> <esc>yiwi<lt><esc>ea></><esc>hpF>i
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
 
 " ——————————— Coc(Conquer of Completion) ———————————
 let g:coc_disable_startup_warning = 1
@@ -334,6 +308,7 @@ inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
 " ============== New movement keymap ============== "
 inoremap hh <ESC>
+inoremap <A-c> <ESC> ""
 noremap ; l
 noremap l k
 noremap k j
