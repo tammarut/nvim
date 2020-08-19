@@ -34,6 +34,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
     Plug 'tpope/vim-commentary'
+    " Simple indentation guides for your buffers
+    Plug 'thaerkh/vim-indentguides'
 
 " Initialize plugin system
 call plug#end()
@@ -224,7 +226,6 @@ let g:prettier#exec_cmd_async = 1
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " ============== vim-go ============== "
-filetype plugin indent on
 
 " Allow backspace to delete indentation and inserted text
 " i.e. how it works in most programs
@@ -273,7 +274,6 @@ highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
 let g:gitgutter_enabled = 1
-"let g:gitgutter_highlight_linenrs = 1 " turn on line number highlight"
 
 " ============== Vim airline ============== "
 set t_Co=256
@@ -286,7 +286,9 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
 set tabstop=2   " number of visual spaces per TAB
-set expandtab   "tabs are spaces
+set shiftwidth=2  " when indenting with '>', use 4 spaces width
+set softtabstop=4   " Sets the number of columns for a TAB.
+set expandtab   " On pressing tab, insert 4 spaces
 set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set lazyredraw  "redraw only when we need to
@@ -435,4 +437,4 @@ autocmd FileType netrw setl bufhidden=delete
 " ———————— Remapping key ————————— "
 nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
-nnoremap  <Leader>d :bd<CR>
+nnoremap <silent> <leader>d :lclose<bar>b#<bar>bd #<CR>
