@@ -316,10 +316,14 @@ noremap l k
 noremap k j
 noremap j h
 
+" ————————— Insert newline without exit insert mode ————————
+inoremap <S-cr> <ESC>o
+inoremap <C-s> :w<CR>
+
 " ————————— Mouse enabled —————————
 set mouse=a
 
-" ⇨Navigate around splits with a single key combo.
+" ————————— Navigate around splits with a single key combo. —————————
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
@@ -329,8 +333,7 @@ nnoremap <C-j> <C-w><C-j>
 au FocusGained,BufEnter * :checktime
 
 "============== Terminal ============== "
-set splitbelow
-noremap <Leader>t :e term://bash<CR>
+noremap <Leader>t :below 10sp term://bash<CR>
 tnoremap hh <C-\><C-n>
 
 " ============== Skin ============== "
@@ -425,7 +428,14 @@ endfunction
 " ========== Open netrw automatically like a project Draw ========== "
 augroup ProjectDrawer
   autocmd!
-  autocmd VimEnter * :call ToggleNetrw()
+  if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+      silent exe "bwipeout " . bufnr("$")
+      exe 'cd '.argv()[0]
+      autocmd VimEnter * :call ToggleNetrw()
+  else
+      autocmd VimEnter * :call ToggleNetrw()
+      autocmd VimEnter * wincmd p
+  endif
 augroup END
 
 
