@@ -1,4 +1,4 @@
-" —————————————— vim-plug ——————————————
+" 📎—————————————— vim-plug ——————————————
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -29,16 +29,29 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Auto close (X)HTML tags
     Plug 'alvan/vim-closetag'
     " gruvbox skins
-    Plug 'morhetz/gruvbox'
+    Plug 'gruvbox-community/gruvbox'
     " Git wrapper
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
     Plug 'tpope/vim-commentary'
     " Simple indentation guides for your buffers
     Plug 'thaerkh/vim-indentguides'
+    " Searching in Vim as easy as searching in modern editors/IDEs.
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    Plug 'junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
+
+" —————————— fzf ——————————
+map <C-p> :GFiles<CR>
+map <leader>b :Buffers<CR>
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
+
+let $FZF_DEFAULT_OPTS = '--layout=reverse'
+" Tell FZF to use RG - so we can skip .gitignore files even if not using
+let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+nnoremap <leader>gc :GCheckout<CR>
 
 " —————————— vim-fugitive ——————————
 " git status
