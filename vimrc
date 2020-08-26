@@ -39,6 +39,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Searching in Vim as easy as searching in modern editors/IDEs.
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     Plug 'junegunn/fzf.vim'
+    " Checkout, create, delete branches and tags with fzf
+    Plug 'stsewd/fzf-checkout.vim'
 
 " Initialize plugin system
 call plug#end()
