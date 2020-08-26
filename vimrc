@@ -40,6 +40,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 " Initialize plugin system
 call plug#end()
 
+" —————————— vim-fugitive ——————————
+" git status
+nmap <leader>gs :G<CR>
+" Accept current changes(left pane)
+nmap <leader>gf :diffget //2<CR>
+" Accept incoming changes(right pane)
+nmap <leader>gh :diffget //3<CR>
+
 " —————————— vim-closetag ——————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " " These are the file extensions where this plugin is enabled.
