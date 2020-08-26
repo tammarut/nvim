@@ -140,9 +140,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -176,11 +173,6 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of LS, ex: coc-tsserver
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
@@ -212,6 +204,13 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+" ⋯⋯⌨ Custom keymap
+nmap <leader>rr <Plug>(coc-rename)
+" prw = project rename word
+nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
+nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 
 
 " ——————————— YML ———————————
@@ -285,9 +284,6 @@ let g:go_fmt_experimental = 1
 let g:go_metalinter_autosave=1
 let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
-" Autocomplete prompt to appear automatically when press .(dot)
-"au filetype go inoremap <buffer> . .<C-x><C-o>
-
 " ============== Rainbow brackets Configuration ============== "
 let g:rainbow_active = 1 " set to 0 if you want to enable it later via :RainbowToggle
 
@@ -341,7 +337,8 @@ noremap j h
 
 " ————————— Insert newline without exit insert mode ————————
 inoremap <S-cr> <ESC>o
-inoremap <C-s> :w<CR>
+" Save file by Ctrl-s
+nnoremap <C-s> :w<cr>
 
 " ————————— Mouse enabled —————————
 set mouse=a
@@ -363,6 +360,12 @@ tnoremap hh <C-\><C-n>
 syntax on
 set background=dark
 colorscheme gruvbox
+let g:gruvbox_contrast_dark = 'hard'
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+let g:gruvbox_invert_selection='0'
 
 " ================ Search ================= "
 set incsearch  " Highlight as you search
@@ -467,7 +470,7 @@ augroup END
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
-" ———————— Remapping key ————————— "
+" ———————— Remapping key(work around buffers) ————————— "
 nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap <silent> <leader>d :lclose<bar>b#<bar>bd #<CR>
