@@ -227,14 +227,31 @@ nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
 
 " ————————— ale —————————
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\}
+
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier','eslint'],
 \}
 
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠'
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed = 'never'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_save = 1
+let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma none'
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
+
+
+" —————————— vim-jsx-pretty ——————————
+let g:jsx_ext_required = 0
 
 " ————————— vim-javascript  ———————————
 let g:javascript_plugin_jsdoc = 1
@@ -335,10 +352,12 @@ noremap l k
 noremap k j
 noremap j h
 
-" ————————— Insert newline without exit insert mode ————————
-inoremap <S-cr> <ESC>o
+" ————————— Utilize Shortcut ————————
 " Save file by Ctrl-s
 nnoremap <C-s> :w<cr>
+" Move to beginning/end of line
+nnoremap B ^
+nnoremap E $
 
 " ————————— Mouse enabled —————————
 set mouse=a
