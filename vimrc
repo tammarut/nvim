@@ -18,8 +18,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
     Plug 'pangloss/vim-javascript'
-    " post instalyaryarnnl (yarn install | npm install) then load plugin only for editing supported files
-    Plug 'prettier/vim-prettier', { 'do': 'npm install' }
     " Rainbow Parentheses
     Plug 'luochen1990/rainbow'
     " Combine with netrw
@@ -66,7 +64,7 @@ nmap <leader>gh :diffget //3<CR>
 " —————————— vim-closetag ——————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " " These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.html.erb,*.md'
+let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.ts,*.html.erb,*.md'
 
 " ——————————— Coc(Conquer of Completion) ———————————
 let g:coc_disable_startup_warning = 1
@@ -213,6 +211,9 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 
 
+" ——————————— Prettier(coc-prettier) ———————————
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " ——————————— YML ———————————
 " Skip re-indenting lines after a comment #, after a colon : or at the
 " beginning of a line.
@@ -228,12 +229,13 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentke
 
 " ————————— ale —————————
 let g:ale_linters = {
-\   'javascript': ['standard'],
+\   'javascript': ['eslint'],
+\   'typescript': ['tsserver', 'tslint'],
 \}
 
 let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['prettier','eslint'],
+\   '*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
 let g:ale_sign_error = '❌'
@@ -256,13 +258,6 @@ let g:jsx_ext_required = 0
 " ————————— vim-javascript  ———————————
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1  " enables syntax highlighting
-
-" ————————— vim-prettier  ———————————
-let g:prettier#autoformat = 0
-let g:prettier#quickfix_enabled = 0
-let g:prettier#config#tab_width = 2
-let g:prettier#exec_cmd_async = 1
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
 
 " ============== vim-go ============== "
 
