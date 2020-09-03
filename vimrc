@@ -44,13 +44,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 call plug#end()
 
 " —————————— fzf ——————————
-map <C-p> :GFiles<CR>
+map <C-p> :Files<CR>
 map <leader>b :Buffers<CR>
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " Tell FZF to use RG - so we can skip .gitignore files even if not using
-let $FZF_DEFAULT_COMMAND="rg --files --hidden"
+let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 nnoremap <leader>gc :GCheckout<CR>
 
 " —————————— vim-fugitive ——————————
@@ -347,7 +347,7 @@ noremap l k
 noremap k j
 noremap j h
 
-" ————————— Utilize Shortcut ————————
+" ——————————— Utilize Shortcut ———————————
 " Save file by Ctrl-s
 nnoremap <C-s> :w<cr>
 " Move to beginning/end of line
