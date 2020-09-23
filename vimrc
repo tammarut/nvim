@@ -2,6 +2,7 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
+" 🗽Initialize plugin system
 call plug#begin('~/.config/nvim/autoload/plugged')
     " Neovim, full language server protocol support as VSCode
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -27,7 +28,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Auto close (X)HTML tags
     Plug 'alvan/vim-closetag'
     " gruvbox skins
-    Plug 'gruvbox-community/gruvbox'
+    Plug 'sainnhe/gruvbox-material'
     " Git wrapper
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
@@ -39,8 +40,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'
     " Checkout, create, delete branches and tags with fzf
     Plug 'stsewd/fzf-checkout.vim'
+    " For better syntax highlighting support
 
-" Initialize plugin system
 call plug#end()
 
 " —————————— fzf ——————————
@@ -368,13 +369,13 @@ nnoremap <C-j> <C-w><C-j>
 au FocusGained,BufEnter * :checktime
 
 "============== Terminal ============== "
-noremap <Leader>t :below 10sp term://bash<CR>
+noremap <Leader>t :below 10sp term://zsh<CR>
 tnoremap hh <C-\><C-n>
 
 " ============== Skin ============== "
 syntax on
 set background=dark
-colorscheme gruvbox
+colorscheme gruvbox-material
 let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
