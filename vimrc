@@ -35,8 +35,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'
     " Simple indentation guides for your buffers
     Plug 'thaerkh/vim-indentguides'
-    " Searching in Vim as easy as searching in modern editors/IDEs.
+    " A command-line fuzzy finder that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    " Searching in Vim as easy as searching in modern editors/IDEs.
     Plug 'junegunn/fzf.vim'
     " Checkout, create, delete branches and tags with fzf
     Plug 'stsewd/fzf-checkout.vim'
@@ -47,7 +48,7 @@ call plug#end()
 " —————————— fzf ——————————
 map <C-p> :Files<CR>
 map <leader>b :Buffers<CR>
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.7, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " Tell FZF to use RG - so we can skip .gitignore files even if not using
@@ -241,7 +242,7 @@ let g:ale_fixers = {
 \}
 
 let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '⚠'
+let g:ale_sign_warning = '🚸'
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
@@ -307,6 +308,10 @@ highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
 let g:gitgutter_enabled = 1
+
+" 🦘Jump between hunks(code chnaged)
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 " ============== Vim airline ============== "
 set t_Co=256
