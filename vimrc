@@ -1,4 +1,6 @@
-" 📎—————————————— vim-plug ——————————————
+" ————————————————
+" |   vim-plug   |
+" ————————————————
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -45,7 +47,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 call plug#end()
 
-" —————————— fzf ——————————
+" ———————————
+" |   fzf   |
+" ———————————
 map <C-p> :Files<CR>
 map <leader>b :Buffers<CR>
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.7, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
@@ -55,7 +59,9 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 nnoremap <leader>gc :GCheckout<CR>
 
-" —————————— vim-fugitive ——————————
+" ————————————————————
+" |   vim-fugitive   |
+" ————————————————————
 " git status
 nmap <leader>gs :G<CR>
 " Accept current changes(left pane)
@@ -63,12 +69,16 @@ nmap <leader>gf :diffget //2<CR>
 " Accept incoming changes(right pane)
 nmap <leader>gh :diffget //3<CR>
 
-" —————————— vim-closetag ——————————
+" —————————————————————
+" |   vim-closetag   |
+" ————————————————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " " These are the file extensions where this plugin is enabled.
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.ts,*.html.erb,*.md'
 
-" ——————————— Coc(Conquer of Completion) ———————————
+" ——————————————————————————————————
+" |   Coc(Conquer of Completion)   |
+" ——————————————————————————————————
 let g:coc_disable_startup_warning = 1
 
 " TextEdit might fail if hidden is not set.
@@ -213,10 +223,14 @@ nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
 
 
-" ——————————— Prettier(coc-prettier) ———————————
+" ——————————————————————————————
+" |   Prettier(coc-prettier)   |
+" ——————————————————————————————
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" ——————————— YML ———————————
+" —————————————————————
+" |   YML formatter   |
+" —————————————————————
 " Skip re-indenting lines after a comment #, after a colon : or at the
 " beginning of a line.
 " ts (tabstop) a <Tab> key will count as two spaces
@@ -229,7 +243,9 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 " nofoldenable the file will be opened without any folds
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
 
-" ————————— ale —————————
+" —————————————————————————————————————
+" |   ale(Asynchronous Lint Engine)   |
+" —————————————————————————————————————
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'tslint'],
@@ -255,15 +271,20 @@ let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-com
 let g:ale_fix_on_save = 1
 
 
-" —————————— vim-jsx-pretty ——————————
+" ——————————————————————
+" |   vim-jsx-pretty   |
+" ——————————————————————
 let g:jsx_ext_required = 0
 
-" ————————— vim-javascript  ———————————
+" ——————————————————————
+" |   vim-javascript   |
+" ——————————————————————
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1  " enables syntax highlighting
 
-" ============== vim-go ============== "
-
+" ——————————————
+" |   vim-go   |
+" ——————————————
 " Allow backspace to delete indentation and inserted text
 " i.e. how it works in most programs
 " indent  allow backspacing over autoindent
@@ -299,11 +320,15 @@ let g:go_fmt_experimental = 1
 let g:go_metalinter_autosave=1
 let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
-" ============== Rainbow brackets Configuration ============== "
+" ——————————————————————————————————————
+" |   Rainbow brackets Configuration   |
+" ——————————————————————————————————————
 let g:rainbow_active = 1 " set to 0 if you want to enable it later via :RainbowToggle
 
 
-" ============== Git Gutter ============== "
+" ——————————————————
+" |   Git Gutter   |
+" ——————————————————
 highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
 highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
@@ -313,20 +338,20 @@ let g:gitgutter_enabled = 1
 nmap ]h <Plug>(GitGutterNextHunk)
 nmap [h <Plug>(GitGutterPrevHunk)
 
-" ============== Vim airline ============== "
+" ———————————————————
+" |   Vim airline   |
+" ———————————————————
 set t_Co=256
 let g:airline_powerline_fonts = 1
 let g:airline_theme='badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
-" ============== Normal setting ============== "
+" ——————————————————————
+" |   Normal setting   |
+" ——————————————————————
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
-set tabstop=2   " number of visual spaces per TAB
-set shiftwidth=2  " when indenting with '>', use 4 spaces width
-set softtabstop=4   " Sets the number of columns for a TAB.
-set expandtab   " On pressing tab, insert 4 spaces
 set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set lazyredraw  "redraw only when we need to
@@ -338,6 +363,14 @@ set encoding=utf-8
 " Set the encoding of files written
 set fileencoding=utf-8
 
+" ———————————
+" |   Tab   |
+" ———————————
+set tabstop=2   " number of visual spaces per TAB
+set shiftwidth=2  " when indenting with '>', use 4 spaces width
+set softtabstop=4   " Sets the number of columns for a TAB.
+set expandtab   " On pressing tab, insert 4 spaces
+
 " —————————— Vim's Built-in for Autocompleting words ——————————
 set complete+=kspell
 set completeopt=menuone,longest
@@ -346,7 +379,9 @@ set shortmess+=c
 inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
 inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
-" ============== New movement keymap ============== "
+" ———————————————————————————
+" |   New movement keymap   |
+" ———————————————————————————
 inoremap hh <ESC>
 inoremap <A-c> <ESC> ""
 noremap ; l
@@ -354,17 +389,23 @@ noremap l k
 noremap k j
 noremap j h
 
-" ——————————— Utilize Shortcut ———————————
+" ————————————————————————
+" |   Utilize Shortcut   |
+" ————————————————————————
 " Save file by Ctrl-s
 nnoremap <C-s> :w<cr>
 " Move to beginning/end of line
 nnoremap B ^
 nnoremap E $
 
-" ————————— Mouse enabled —————————
+" —————————————————————
+" |   Mouse enabled   |
+" —————————————————————
 set mouse=a
 
-" ————————— Navigate around splits with a single key combo. —————————
+" ——————————————————————————————————————————————————————
+" |   Navigate around splits with a single key combo   |
+" ——————————————————————————————————————————————————————
 nnoremap <C-l> <C-w><C-l>
 nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
@@ -373,11 +414,15 @@ nnoremap <C-j> <C-w><C-j>
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
 
-"============== Terminal ============== "
+" ————————————————
+" |   Terminal   |
+" ————————————————
 noremap <Leader>t :below 10sp term://zsh<CR>
 tnoremap hh <C-\><C-n>
 
-" ============== Skin ============== "
+" ————————————————————
+" |   Scheme(skin)   |
+" ————————————————————
 syntax on
 set background=dark
 colorscheme gruvbox-material
@@ -388,7 +433,9 @@ if exists('+termguicolors')
 endif
 let g:gruvbox_invert_selection='0'
 
-" ================ Search ================= "
+" ——————————————
+" |   Search   |
+" ——————————————
 set incsearch  " Highlight as you search
 set hlsearch   " Highlight the current search
 set ignorecase " Make search case insensitive...
@@ -398,7 +445,9 @@ set smartcase  " ... except when we use uppercase letters
 " Provides tab-completion for all file-related tasks
 set path+=**
 
-" ================ WSL yank support  ================= "
+" ————————————————————————
+" |   WSL yank support   |
+" ————————————————————————
 let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
 if executable(s:clip)
     augroup WSLYank
@@ -409,7 +458,9 @@ endif
 set clipboard=unnamedplus  " Copy to clipboard "+y
 
 
-" ================ Netrw magic  ================= "
+" ———————————————————
+" |   Netrw magic   |
+" ———————————————————
 let g:netrw_banner = 0 "hide netrw top banner
 let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
 let g:netrw_liststyle = 3  " Change the directory view in netrw
@@ -418,7 +469,7 @@ let g:netrw_browse_split = 4 " Open file on same windows vim
 let g:netrw_winsize = 20 " size of left window
 
 
-" ========== Open to Right========== "
+" —————————— Open to Right ——————————
 function! OpenToRight()
         :normal v
         let g:path=expand('%:p')
@@ -427,7 +478,7 @@ function! OpenToRight()
         :normal <C-l>
 endfunction
 
-" ========== Open to Below ========== "
+" —————————— Open to Below ——————————
 function! OpenToBelow()
         :normal v
         let g:path=expand('%:p')
@@ -436,7 +487,7 @@ function! OpenToBelow()
         :normal <C-l>
 endfunction
 
-" =========== Mapping key OpenRight/OpenBelow ========== "
+" —————————— Mapping key OpenRight/OpenBelow ——————————
 function! NetrwMappings()
         " Hack fix to make ctrl-l work properly
         noremap <buffer> <C-l> <C-w>l
@@ -445,13 +496,13 @@ function! NetrwMappings()
         noremap <buffer> H :call OpenToBelow()<cr>
 endfunction
 
-" =========== Run Mapping function automatically ========== "
+" —————————— Run Mapping function automatically ——————————
 augroup netrw_mappings
         autocmd!
         autocmd filetype netrw call NetrwMappings()
 augroup END
 
-" ======== Allow for netrw to be toggled explorer ========
+" —————————— Allow for netrw to be toggled explorer ——————————
 let g:NetrwIsOpen=0  " Make sure that netrw is open variable
 function! ToggleNetrw()
     if g:NetrwIsOpen
@@ -472,7 +523,7 @@ endfunction
 " Close Netrw if it's the only buffer open
 "autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
 
-" ========== Open netrw automatically like a project Draw ========== "
+" —————————— Open netrw automatically like a project Draw ——————————
 augroup ProjectDrawer
   autocmd!
   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
@@ -486,12 +537,13 @@ augroup ProjectDrawer
 augroup END
 
 
-
-" ==================== Buffers  ===================== "
+" ———————————————
+" |   Buffers   |
+" ———————————————
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
-" ———————— Remapping key(work around buffers) ————————— "
+" ———————— Remapping key(work around buffers) —————————
 nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap <silent> <leader>d :lclose<bar>b#<bar>bd #<CR>
