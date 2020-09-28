@@ -48,12 +48,17 @@ call plug#end()
 " —————————— fzf ——————————
 map <C-p> :Files<CR>
 map <leader>b :Buffers<CR>
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.7, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " Tell FZF to use RG - so we can skip .gitignore files even if not using
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+
+" fzf-checkout
 nnoremap <leader>gc :GCheckout<CR>
+let g:fzf_branch_actions = {
+      \ 'track': {'keymap': 'ctrl-t'},
+      \}
 
 " —————————— vim-fugitive ——————————
 " git status
