@@ -47,6 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
 call plug#end()
 
+
 " ———————————
 " |   fzf   |
 " ———————————
@@ -74,12 +75,14 @@ nmap <leader>gf :diffget //2<CR>
 " Accept incoming changes(right pane)
 nmap <leader>gh :diffget //3<CR>
 
+
 " —————————————————————
 " |   vim-closetag   |
 " ————————————————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " " These are the file extensions where this plugin is enabled.
 let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.ts,*.html.erb,*.md'
+
 
 " ——————————————————————————————————
 " |   Coc(Conquer of Completion)   |
@@ -368,6 +371,7 @@ set encoding=utf-8
 " Set the encoding of files written
 set fileencoding=utf-8
 
+
 " ———————————
 " |   Tab   |
 " ———————————
@@ -375,6 +379,8 @@ set tabstop=2   " number of visual spaces per TAB
 set shiftwidth=2  " when indenting with '>', use 4 spaces width
 set softtabstop=4   " Sets the number of columns for a TAB.
 set expandtab   " On pressing tab, insert 4 spaces
+set shiftround " Shift to the next round tab stop.
+
 
 " —————————— Vim's Built-in for Autocompleting words ——————————
 set complete+=kspell
@@ -438,15 +444,24 @@ if exists('+termguicolors')
 endif
 let g:gruvbox_invert_selection='0'
 
-" ——————————————
-" |   Search   |
-" ——————————————
-set incsearch  " Highlight as you search
-set hlsearch   " Highlight the current search
+" —————————————————————————
+" |   Search(highlight)   |
+" —————————————————————————
+set incsearch  " Highlight while search
+set hlsearch   " Enable highlight the current search
 set ignorecase " Make search case insensitive...
 set smartcase  " ... except when we use uppercase letters
 
-" Search down into subdirectories
+" Press <leader> Enter to remove search highlights
+noremap <silent> <leader><cr> :noh<cr>
+
+" ▶ Keep search results at the center of screen
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+
+" ▶ Search down into subdirectories
 " Provides tab-completion for all file-related tasks
 set path+=**
 
@@ -470,7 +485,6 @@ let g:netrw_banner = 0 "hide netrw top banner
 let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
 let g:netrw_liststyle = 3  " Change the directory view in netrw
 let g:netrw_browse_split = 4 " Open file on same windows vim
-"let g:netrw_altv = 1   " Open files in vertical
 let g:netrw_winsize = 20 " size of left window
 
 
