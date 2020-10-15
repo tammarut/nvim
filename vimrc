@@ -27,6 +27,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-vinegar'
     " The React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
     Plug 'maxmellon/vim-jsx-pretty'
+    Plug 'HerringtonDarkholme/yats.vim'
     " Auto close (X)HTML tags
     Plug 'alvan/vim-closetag'
     " gruvbox skins
@@ -262,6 +263,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'javascript': ['prettier','eslint'],
 \   'typescript': ['prettier','eslint'],
+\    'html': ['prettier'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
@@ -279,10 +281,17 @@ let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-com
 let g:ale_fix_on_save = 1
 
 
+" ——————————————————————————————————————
+" |   yats(.tsx syntax highlighting)   |
+" ——————————————————————————————————————
+let g:yats_host_keyword = 1
+
 " ——————————————————————
 " |   vim-jsx-pretty   |
 " ——————————————————————
 let g:jsx_ext_required = 0
+let g:vim_jsx_pretty_colorful_config = 1 " default 0
+let g:vim_jsx_pretty_highlight_close_tag = 1"
 
 " ——————————————————————
 " |   vim-javascript   |
