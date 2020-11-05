@@ -37,14 +37,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
     Plug 'tpope/vim-commentary'
     " Simple indentation guides for your buffers
-    Plug 'thaerkh/vim-indentguides'
+    Plug 'Yggdroot/indentLine'
     " A command-line fuzzy finder that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.
     Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     " Searching in Vim as easy as searching in modern editors/IDEs.
     Plug 'junegunn/fzf.vim'
     " Checkout, create, delete branches and tags with fzf
     Plug 'stsewd/fzf-checkout.vim'
-    " For better syntax highlighting support
 
 call plug#end()
 
@@ -380,6 +379,12 @@ set encoding=utf-8
 " Set the encoding of files written
 set fileencoding=utf-8
 
+
+" —————————————————
+" |   indentLine   |
+" —————————————————
+let g:indentLine_color_term = 239
+let g:indentLine_char = '┊'
 
 " ———————————
 " |   Tab   |
