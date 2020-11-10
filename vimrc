@@ -25,6 +25,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'luochen1990/rainbow'
     " Combine with netrw
     Plug 'tpope/vim-vinegar'
+    " Surroundings": parentheses, brackets, quotes, XML tags, and more
+    Plug 'tpope/vim-surround'
     " The React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
     Plug 'maxmellon/vim-jsx-pretty'
     Plug 'HerringtonDarkholme/yats.vim'
