@@ -18,7 +18,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Insert/delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
     " Go development plugin for Vim
-    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
     Plug 'pangloss/vim-javascript'
     " Rainbow Parentheses
@@ -46,6 +46,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'junegunn/fzf.vim'
     " Checkout, create, delete branches and tags with fzf
     Plug 'stsewd/fzf-checkout.vim'
+    " Nvim Treesitter configurations and abstraction layer
+    Plug 'nvim-treesitter/nvim-treesitter'
 
 call plug#end()
 
@@ -453,7 +455,7 @@ tnoremap hh <C-\><C-n>
 syntax on
 set background=dark
 colorscheme gruvbox-material
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'Soft'
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -556,7 +558,7 @@ function! ToggleNetrw()
 endfunction
 
 " Close Netrw if it's the only buffer open
-"autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+" autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
 
 " —————————— Open netrw automatically like a project Draw ——————————
 augroup ProjectDrawer
