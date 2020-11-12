@@ -48,6 +48,9 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'stsewd/fzf-checkout.vim'
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter'
+    " A file explorer tree for neovim written in lua
+    Plug 'kyazdani42/nvim-web-devicons' " for file icons
+    Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
 
@@ -455,7 +458,7 @@ tnoremap hh <C-\><C-n>
 syntax on
 set background=dark
 colorscheme gruvbox-material
-let g:gruvbox_contrast_dark = 'Soft'
+let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -499,79 +502,96 @@ set clipboard=unnamedplus  " Copy to clipboard "+y
 " ———————————————————
 " |   Netrw magic   |
 " ———————————————————
-let g:netrw_banner = 0 "hide netrw top banner
-let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
-let g:netrw_liststyle = 3  " Change the directory view in netrw
-let g:netrw_browse_split = 4 " Open file on same windows vim
-let g:netrw_winsize = 20 " size of left window
+" let g:netrw_banner = 0 "hide netrw top banner
+" let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
+" let g:netrw_liststyle = 3  " Change the directory view in netrw
+" let g:netrw_browse_split = 4 " Open file on same windows vim
+" let g:netrw_winsize = 20 " size of left window
 
 
-" —————————— Open to Right ——————————
-function! OpenToRight()
-        :normal v
-        let g:path=expand('%:p')
-        :q!
-        execute 'belowright vnew' g:path
-        :normal <C-l>
-endfunction
+" " —————————— Open to Right ——————————
+" function! OpenToRight()
+"         :normal v
+"         let g:path=expand('%:p')
+"         :q!
+"         execute 'belowright vnew' g:path
+"         :normal <C-l>
+" endfunction
 
-" —————————— Open to Below ——————————
-function! OpenToBelow()
-        :normal v
-        let g:path=expand('%:p')
-        :q!
-        execute 'belowright new' g:path
-        :normal <C-l>
-endfunction
+" " —————————— Open to Below ——————————
+" function! OpenToBelow()
+"         :normal v
+"         let g:path=expand('%:p')
+"         :q!
+"         execute 'belowright new' g:path
+"         :normal <C-l>
+" endfunction
 
-" —————————— Mapping key OpenRight/OpenBelow ——————————
-function! NetrwMappings()
-        " Hack fix to make ctrl-l work properly
-        noremap <buffer> <C-l> <C-w>l
-        noremap <silent> <A-b> :call ToggleNetrw()<CR>
-        noremap <buffer> V :call OpenToRight()<cr>
-        noremap <buffer> H :call OpenToBelow()<cr>
-endfunction
+" " —————————— Mapping key OpenRight/OpenBelow ——————————
+" function! NetrwMappings()
+"         " Hack fix to make ctrl-l work properly
+"         noremap <buffer> <C-l> <C-w>l
+"         noremap <silent> <A-b> :call ToggleNetrw()<CR>
+"         noremap <buffer> V :call OpenToRight()<cr>
+"         noremap <buffer> H :call OpenToBelow()<cr>
+" endfunction
 
-" —————————— Run Mapping function automatically ——————————
-augroup netrw_mappings
-        autocmd!
-        autocmd filetype netrw call NetrwMappings()
-augroup END
+" " —————————— Run Mapping function automatically ——————————
+" augroup netrw_mappings
+"         autocmd!
+"         autocmd filetype netrw call NetrwMappings()
+" augroup END
 
-" —————————— Allow for netrw to be toggled explorer ——————————
-let g:NetrwIsOpen=0  " Make sure that netrw is open variable
-function! ToggleNetrw()
-    if g:NetrwIsOpen
-        let i = bufnr("$")
-        while (i >= 1)
-            if (getbufvar(i, "&filetype") == "netrw")
-                silent exe "bwipeout " . i
-            endif
-            let i-=1
-        endwhile
-        let g:NetrwIsOpen=0
-    else
-        let g:NetrwIsOpen=1
-        silent Lexplore
-    endif
-endfunction
+" " —————————— Allow for netrw to be toggled explorer ——————————
+" let g:NetrwIsOpen=0  " Make sure that netrw is open variable
+" function! ToggleNetrw()
+"     if g:NetrwIsOpen
+"         let i = bufnr("$")
+"         while (i >= 1)
+"             if (getbufvar(i, "&filetype") == "netrw")
+"                 silent exe "bwipeout " . i
+"             endif
+"             let i-=1
+"         endwhile
+"         let g:NetrwIsOpen=0
+"     else
+"         let g:NetrwIsOpen=1
+"         silent Lexplore
+"     endif
+" endfunction
 
-" Close Netrw if it's the only buffer open
-" autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
+" " Close Netrw if it's the only buffer open
+" " autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
 
-" —————————— Open netrw automatically like a project Draw ——————————
-augroup ProjectDrawer
-  autocmd!
-  if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-      silent exe "bwipeout " . bufnr("$")
-      exe 'cd '.argv()[0]
-      autocmd VimEnter * :call ToggleNetrw()
-  else
-      autocmd VimEnter * :call ToggleNetrw()
-      autocmd VimEnter * wincmd p
-  endif
-augroup END
+" " —————————— Open netrw automatically like a project Draw ——————————
+" augroup ProjectDrawer
+"   autocmd!
+"   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
+"       silent exe "bwipeout " . bufnr("$")
+"       exe 'cd '.argv()[0]
+"       autocmd VimEnter * :call ToggleNetrw()
+"   else
+"       autocmd VimEnter * :call ToggleNetrw()
+"       autocmd VimEnter * wincmd p
+"   endif
+" augroup END
+
+
+" —————————————————
+" |   Nvim tree   |
+" —————————————————
+nnoremap <A-b> :LuaTreeToggle<CR>
+nnoremap <leader>r :LuaTreeRefresh<CR>
+nnoremap <A-f> :LuaTreeFindFile<CR>
+
+set termguicolors " this variable must be enabled for colors to be applied properly
+
+let g:lua_tree_width = 40 "30 by default
+let g:lua_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:lua_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:lua_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+let g:lua_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+let g:lua_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 
 
 " ———————————————
