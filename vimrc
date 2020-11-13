@@ -21,8 +21,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
     Plug 'pangloss/vim-javascript'
-    " Rainbow Parentheses
-    Plug 'luochen1990/rainbow'
     " Combine with netrw
     Plug 'tpope/vim-vinegar'
     " Surroundings": parentheses, brackets, quotes, XML tags, and more
@@ -274,7 +272,7 @@ let g:ale_fixers = {
 \}
 
 let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '🚸'
+let g:ale_sign_warning = '❗'
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
@@ -343,10 +341,6 @@ let g:go_fmt_experimental = 1
 let g:go_metalinter_autosave=1
 let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
-" ——————————————————————————————————————
-" |   Rainbow brackets Configuration   |
-" ——————————————————————————————————————
-let g:rainbow_active = 1 " set to 0 if you want to enable it later via :RainbowToggle
 
 
 " ——————————————————
