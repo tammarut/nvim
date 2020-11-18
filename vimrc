@@ -267,6 +267,7 @@ let g:ale_linters = {
 let g:ale_fixers = {
 \   'javascript': ['prettier','eslint'],
 \   'typescript': ['prettier','eslint'],
+\   'typescriptreact': ['prettier','eslint'],
 \    'html': ['prettier'],
 \   '*': ['remove_trailing_lines', 'trim_whitespace']
 \}
@@ -372,6 +373,7 @@ set showcmd "show command in bottom bar
 set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set lazyredraw  "redraw only when we need to
+set ttimeoutlen=0
 set showmatch  "highlight matching [{()}]
 set autowrite
 " Change how vim represents characters on the screen
