@@ -407,6 +407,12 @@ set shortmess+=c
 inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
 inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
+" ———————————————
+" |   Folding   |
+" ———————————————
+set foldmethod=syntax
+set foldlevelstart=99
+
 " ———————————————————————————
 " |   New movement keymap   |
 " ———————————————————————————
