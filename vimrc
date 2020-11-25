@@ -17,6 +17,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dense-analysis/ale'
     " Insert/delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
+    " Rainbow Parentheses
+    Plug 'luochen1990/rainbow'
     " Go development plugin for Vim
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
@@ -86,7 +88,7 @@ nmap <leader>gh :diffget //3<CR>
 " ————————————————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " " These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = '*.html,*.xhtml,*.xml,*.js,*.ts,*.html.erb,*.md'
+let g:closetag_filenames = '*.html,*.tsx,*.md'
 
 
 " ——————————————————————————————————
@@ -294,7 +296,7 @@ let g:yats_host_keyword = 1
 " ——————————————————————
 " |   vim-jsx-pretty   |
 " ——————————————————————
-let g:jsx_ext_required = 0
+let g:jsx_ext_required = 1
 let g:vim_jsx_pretty_colorful_config = 1 " default 0
 let g:vim_jsx_pretty_highlight_close_tag = 1"
 
@@ -303,6 +305,11 @@ let g:vim_jsx_pretty_highlight_close_tag = 1"
 " ——————————————————————
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1  " enables syntax highlighting
+
+" ———————————————————————————
+" |   rainbow parentheses   |
+" ——————————————————————————
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 
 " ——————————————
 " |   vim-go   |
@@ -370,7 +377,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " ——————————————————————
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
-set cursorline  "highlight current line
+" set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set lazyredraw  "redraw only when we need to
 set ttimeoutlen=0
