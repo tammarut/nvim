@@ -264,6 +264,7 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentke
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'tslint'],
+\   'typescriptreact': ['tsserver','tslint'],
 \}
 
 let g:ale_fixers = {
@@ -413,6 +414,11 @@ set shortmess+=c
 " ⇨ Select the complete menu item like CTRL+y world.
 inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
 inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
+
+" ———————————————
+" |   Register   |
+" ———————————————
+vnoremap <leader>p "_dP
 
 " ———————————————
 " |   Folding   |
