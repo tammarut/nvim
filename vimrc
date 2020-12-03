@@ -47,7 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Checkout, create, delete branches and tags with fzf
     Plug 'stsewd/fzf-checkout.vim'
     " Nvim Treesitter configurations and abstraction layer
-    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " A file explorer tree for neovim written in lua
     Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
