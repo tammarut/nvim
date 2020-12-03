@@ -602,6 +602,7 @@ nnoremap <A-f> :LuaTreeFindFile<CR>
 set termguicolors " this variable must be enabled for colors to be applied properly
 
 let g:lua_tree_width = 40 "30 by default
+let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
 let g:lua_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:lua_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:lua_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
