@@ -49,7 +49,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " A file explorer tree for neovim written in lua
-    Plug 'kyazdani42/nvim-web-devicons' " for file icons
+    " Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
@@ -593,21 +593,21 @@ set clipboard=unnamedplus  " Copy to clipboard "+y
 
 
 " —————————————————
-" |   Nvim tree   |
+" |   Nvim Tree   |
 " —————————————————
-nnoremap <A-b> :LuaTreeToggle<CR>
-nnoremap <leader>r :LuaTreeRefresh<CR>
-nnoremap <A-f> :LuaTreeFindFile<CR>
+nnoremap <A-b> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <A-f> :NvimTreeFindFile<CR>
 
 set termguicolors " this variable must be enabled for colors to be applied properly
 
-let g:lua_tree_width = 40 "30 by default
-let g:lua_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
-let g:lua_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-let g:lua_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-let g:lua_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
-let g:lua_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
-let g:lua_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:nvim_tree_width = 35 "30 by default
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
+let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
+let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
+let g:nvim_tree_indent_markers = 1 "0 by default, this option showr indent markers when folders are open
+let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 
 
 " ———————————————
