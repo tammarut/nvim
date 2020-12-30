@@ -374,7 +374,8 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " ———————————————————
 set t_Co=256
 let g:airline_powerline_fonts = 1
-let g:airline_theme='badwolf'
+" let g:airline_theme='badwolf'
+let g:airline_theme = 'gruvbox_material'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -476,9 +477,13 @@ tnoremap hh <C-\><C-n>
 " |   Scheme(skin)   |
 " ————————————————————
 syntax on
+set termguicolors " this variable must be enabled for colors to be applied properly
 set background=dark
+" set contrast
+" this configuration option should be placed before `colorscheme
+" available values: 'hard', 'medium'(default), 'soft'
+let g:gruvbox_material_background = 'hard'
 colorscheme gruvbox-material
-let g:gruvbox_contrast_dark = 'hard'
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -603,8 +608,6 @@ set clipboard=unnamedplus  " Copy to clipboard "+y
 nnoremap <A-b> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <A-f> :NvimTreeFindFile<CR>
-
-set termguicolors " this variable must be enabled for colors to be applied properly
 
 let g:nvim_tree_width = 35 "30 by default
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
