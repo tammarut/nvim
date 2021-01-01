@@ -387,7 +387,7 @@ set showcmd "show command in bottom bar
 " set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set lazyredraw  "redraw only when we need to
-set ttimeoutlen=0
+set timeoutlen=500  " By default timeoutlen is 1000 ms"
 set showmatch  "highlight matching [{()}]
 set autowrite
 " Change how vim represents characters on the screen
@@ -408,7 +408,8 @@ let g:indentLine_char = '┊'
 " ———————————
 set tabstop=2   " number of visual spaces per TAB
 set shiftwidth=2  " when indenting with '>', use 4 spaces width
-set softtabstop=4   " Sets the number of columns for a TAB.
+set softtabstop=2   " Sets the number of columns for a TAB.
+set smarttab " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab   " On pressing tab, insert 4 spaces
 set shiftround " Shift to the next round tab stop.
 
@@ -464,6 +465,12 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
 
+" Use alt + hjkl to resize windows
+nnoremap <A-j> :resize -2<CR>
+nnoremap <A-k> :resize +2<CR>
+nnoremap <A-h> :vertical resize -2<CR>
+nnoremap <A-l> :vertical resize +2<CR>
+
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
 
@@ -483,12 +490,12 @@ set background=dark
 " this configuration option should be placed before `colorscheme
 " available values: 'hard', 'medium'(default), 'soft'
 let g:gruvbox_material_background = 'hard'
+let g:gruvbox_invert_selection='0'
 colorscheme gruvbox-material
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-let g:gruvbox_invert_selection='0'
 
 " —————————————————————————
 " |   Search(highlight)   |
