@@ -49,7 +49,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " A file explorer tree for neovim written in lua
-    " Plug 'kyazdani42/nvim-web-devicons' " for file icons
+   Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
@@ -69,7 +69,14 @@ let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 " fzf-checkout
 nnoremap <leader>gc :GCheckout<CR>
 let g:fzf_branch_actions = {
-      \ 'track': {'keymap': 'ctrl-t'},
+      \ 'track': {
+      \   'keymap': 'ctrl-t',
+      \   'prompt': 'Track> ',
+      \   'execute': 'echo system("{git} checkout --track {branch}")',
+      \   'multiple': v:false,
+      \   'required': ['branch'],
+      \   'confirm': v:false
+      \  },
       \}
 
 " ————————————————————
@@ -409,9 +416,10 @@ let g:indentLine_char = '┊'
 set tabstop=2   " number of visual spaces per TAB
 set shiftwidth=2  " when indenting with '>', use 4 spaces width
 set softtabstop=2   " Sets the number of columns for a TAB.
-set smarttab " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab   " On pressing tab, insert 4 spaces
 set shiftround " Shift to the next round tab stop.
+set autoindent
+set backspace=indent,eol,start
 
 
 " —————————— Vim's Built-in for Autocompleting words ——————————
