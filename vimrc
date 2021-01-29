@@ -17,8 +17,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dense-analysis/ale'
     " Insert/delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
-    " Rainbow Parentheses
-    Plug 'luochen1990/rainbow'
     " Go development plugin for Vim
     " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
@@ -314,11 +312,6 @@ let g:vim_jsx_pretty_highlight_close_tag = 1"
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1  " enables syntax highlighting
 
-" ———————————————————————————
-" |   rainbow parentheses   |
-" ——————————————————————————
-let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
-
 " ——————————————
 " |   vim-go   |
 " ——————————————
@@ -481,6 +474,14 @@ nnoremap <A-l> :vertical resize +2<CR>
 
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
+
+" ——————————————————————————————————————————
+" |   Move lines up/down in varios modes   |
+" ——————————————————————————————————————————
+nnoremap <C-Down> :m .+1<CR>==
+nnoremap <C-Up> :m .-2<CR>==
+vnoremap <C-Down> :m '>+1<CR>gv=gv
+vnoremap <C-Up> :m '<-2<CR>gv=gv
 
 " ————————————————
 " |   Terminal   |
