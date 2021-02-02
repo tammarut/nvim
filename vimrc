@@ -53,12 +53,16 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 call plug#end()
 
 
+let g:mapleader = "\<Space>"
+
 " ———————————
 " |   fzf   |
 " ———————————
 map <C-p> :Files<CR>
 map <leader>b :Buffers<CR>
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
+" [[B]Commits] Customize the options used by 'git log':
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " Tell FZF to use RG - so we can skip .gitignore files even if not using
@@ -92,7 +96,7 @@ nmap <leader>gh :diffget //3<CR>
 " |   vim-closetag   |
 " ————————————————————
 " filenames like *.xml, *.html, *.xhtml, ...
-" " These are the file extensions where this plugin is enabled.
+" These are the file extensions where this plugin is enabled.
 let g:closetag_filenames = '*.html,*.tsx,*.md'
 
 
