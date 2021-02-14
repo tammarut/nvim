@@ -69,7 +69,7 @@ let $FZF_DEFAULT_OPTS = '--layout=reverse'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 
 " fzf-checkout
-nnoremap <leader>gc :GCheckout<CR>
+nnoremap <leader>gc :GBranches<CR>
 let g:fzf_branch_actions = {
       \ 'track': {
       \   'keymap': 'ctrl-t',
@@ -437,6 +437,7 @@ vnoremap <leader>p "_dP
 " ———————————————
 set foldmethod=syntax
 set foldlevelstart=99
+set foldexpr=nvim_treesitter#foldexpr()
 
 " ———————————————————————————
 " |   New movement keymap   |
