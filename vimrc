@@ -498,7 +498,10 @@ tnoremap hh <C-\><C-n>
 " |   Scheme(skin)   |
 " ————————————————————
 syntax on
-set termguicolors " this variable must be enabled for colors to be applied properly
+if (has('termguicolors'))
+  set termguicolors " this variable must be enabled for colors to be applied properly
+
+endif
 set background=dark
 " set contrast
 " this configuration option should be placed before `colorscheme
