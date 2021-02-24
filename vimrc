@@ -378,7 +378,6 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " ———————————————————
 set t_Co=256
 let g:airline_powerline_fonts = 1
-" let g:airline_theme='badwolf'
 let g:airline_theme = 'gruvbox_material'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
@@ -390,6 +389,7 @@ set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
 " set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
+set wildmode=full
 set lazyredraw  "redraw only when we need to
 set timeoutlen=500  " By default timeoutlen is 1000 ms"
 set showmatch  "highlight matching [{()}]
@@ -399,7 +399,13 @@ set encoding=utf-8
 
 " Set the encoding of files written
 set fileencoding=utf-8
+autocmd VimResized * wincmd = " Automatically equalize splits when Vim is resized
 
+" —————————— Improve scroll performance ——————————
+augroup syntaxSyncMinLines
+    autocmd!
+    autocmd Syntax * syntax sync minlines=2000
+augroup END
 
 " —————————————————
 " |   indentLine   |
@@ -416,7 +422,6 @@ set softtabstop=2   " Sets the number of columns for a TAB.
 set expandtab   " On pressing tab, insert 4 spaces
 set shiftround " Shift to the next round tab stop.
 set autoindent
-set backspace=indent,eol,start
 
 
 " —————————— Vim's Built-in for Autocompleting words ——————————
@@ -519,7 +524,7 @@ endif
 " —————————————————————————
 set incsearch  " Highlight while search
 set hlsearch   " Enable highlight the current search
-set ignorecase " Make search case insensitive...
+set infercase " Make search case insensitive...
 set smartcase  " ... except when we use uppercase letters
 
 " Press <leader> Enter to remove search highlights
