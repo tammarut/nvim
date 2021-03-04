@@ -47,7 +47,7 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " A file explorer tree for neovim written in lua
-   Plug 'kyazdani42/nvim-web-devicons' " for file icons
+    Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
 
 call plug#end()
@@ -97,7 +97,7 @@ nmap <leader>gh :diffget //3<CR>
 " ————————————————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = '*.html,*.tsx,*.md'
+let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.md'
 
 
 " ——————————————————————————————————
