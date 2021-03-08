@@ -645,6 +645,7 @@ let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last
 let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 let g:nvim_tree_indent_markers = 1 "0 by default, this option showr indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+let g:nvim_tree_width_allow_resize  = 1 "0 by default, will not resize the tree when opening a file
 
 
 " ———————————————
