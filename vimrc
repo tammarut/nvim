@@ -524,10 +524,11 @@ endif
 " —————————————————————————
 " |   Search(highlight)   |
 " —————————————————————————
-set incsearch  " Highlight while search
 set hlsearch   " Enable highlight the current search
-set infercase " Make search case insensitive...
-set smartcase  " ... except when we use uppercase letters
+set ignorecase " Make search case insensitive...
+set smartcase " ... except when we use uppercase letters
+set incsearch " Highlight while search
+
 
 " Press <leader> Enter to remove search highlights
 noremap <silent> <leader><cr> :noh<cr>
