@@ -53,13 +53,14 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 call plug#end()
 
 
-let g:mapleader = "\<Space>"
+let g:mapleader = "\<Space>" " New map <leader> from \ → spacebar
 
 " ———————————
 " |   fzf   |
 " ———————————
-map <C-p> :Files<CR>
-map <leader>b :Buffers<CR>
+nnoremap <C-p> :Files<CR>
+nnoremap  <leader>b :Buffers<CR>
+nnoremap <leader>h :History<CR>
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
 " [[B]Commits] Customize the options used by 'git log':
 let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
@@ -103,6 +104,7 @@ let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.md'
 " ——————————————————————————————————
 " |   Coc(Conquer of Completion)   |
 " ——————————————————————————————————
+let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-html', 'coc-css', 'coc-json', 'coc-git']
 let g:coc_disable_startup_warning = 1
 
 " TextEdit might fail if hidden is not set.
@@ -387,7 +389,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " ——————————————————————
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
-" set cursorline  "highlight current line
+set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set wildmode=full
 set lazyredraw  "redraw only when we need to
