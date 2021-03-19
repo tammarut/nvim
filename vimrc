@@ -332,29 +332,29 @@ set backspace=indent,eol,start
 " go-vim plugin specific commands
 " Also run `goimports` on your current file on every save
 " Might be be slow on large codebases, if so, just comment it out
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
-let g:go_highlight_types = 1  " beautify highlight 'type'
-let g:go_highlight_extra_types = 1
-let g:go_highlight_functions = 1  " highlight my function and method
-let g:go_highlight_function_parameters = 1
-let g:go_highlight_function_calls = 1  " highlight function and method invocations
-let g:go_highlight_operators = 1  " highlight operators
-let g:go_auto_sameids = 1
-let g:go_highlight_array_whitespace_error = 1
-let g:go_highlight_chan_whitespace_error = 1
-let g:go_highlight_space_tab_error = 1
-let g:go_highlight_trailing_whitespace_error = 0
-let g:go_highlight_fields = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_generate_tags = 1
-let g:go_highlight_string_spellcheck = 1
-let g:go_highlight_format_strings = 1
-let g:go_highlight_variable_declarations = 1
-let g:go_highlight_variable_assignments = 1
-let g:go_fmt_experimental = 1
-let g:go_metalinter_autosave=1
-let g:go_metalinter_autosave_enabled=['golint', 'govet']
+" let g:go_fmt_command = "goimports"
+" let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
+" let g:go_highlight_types = 1  " beautify highlight 'type'
+" let g:go_highlight_extra_types = 1
+" let g:go_highlight_functions = 1  " highlight my function and method
+" let g:go_highlight_function_parameters = 1
+" let g:go_highlight_function_calls = 1  " highlight function and method invocations
+" let g:go_highlight_operators = 1  " highlight operators
+" let g:go_auto_sameids = 1
+" let g:go_highlight_array_whitespace_error = 1
+" let g:go_highlight_chan_whitespace_error = 1
+" let g:go_highlight_space_tab_error = 1
+" let g:go_highlight_trailing_whitespace_error = 0
+" let g:go_highlight_fields = 1
+" let g:go_highlight_build_constraints = 1
+" let g:go_highlight_generate_tags = 1
+" let g:go_highlight_string_spellcheck = 1
+" let g:go_highlight_format_strings = 1
+" let g:go_highlight_variable_declarations = 1
+" let g:go_highlight_variable_assignments = 1
+" let g:go_fmt_experimental = 1
+" let g:go_metalinter_autosave=1
+" let g:go_metalinter_autosave_enabled=['golint', 'govet']
 
 
 
@@ -380,7 +380,7 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " ———————————————————
 set t_Co=256
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'base16_gruvbox_dark_hard'
+let g:airline_theme = 'badwolf'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -436,9 +436,14 @@ inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
 inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
 " ———————————————
-" |   register   |
+" |   Register   |
 " ———————————————
-vnoremap <leader>p "_dP
+" delete single characters without updating the default register
+noremap x "_x
+" paste in visual mode without updating the default register
+vnoremap p "_dP
+
+
 
 " ——————————————————————
 " |   Spell checking   |
