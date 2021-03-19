@@ -104,7 +104,7 @@ let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.md'
 " ——————————————————————————————————
 " |   Coc(Conquer of Completion)   |
 " ——————————————————————————————————
-let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-html', 'coc-css', 'coc-json', 'coc-git']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-html', 'coc-css', 'coc-json']
 let g:coc_disable_startup_warning = 1
 
 " TextEdit might fail if hidden is not set.
@@ -380,7 +380,7 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " ———————————————————
 set t_Co=256
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'gruvbox_material'
+let g:airline_theme = 'base16_gruvbox_dark_hard'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -389,6 +389,7 @@ let g:airline#extensions#tabline#buffer_nr_show = 1
 " ——————————————————————
 set number relativenumber  " turn hybrid line number on
 set showcmd "show command in bottom bar
+set noshowmode " hide vim status -- INSERT --
 set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set wildmode=full
@@ -435,14 +436,19 @@ inoremap <expr> <Right> pumvisible() ? "<C-y>" : "<Right>"
 inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 
 " ———————————————
-" |   Register   |
+" |   register   |
 " ———————————————
 vnoremap <leader>p "_dP
+
+" ——————————————————————
+" |   Spell checking   |
+" ——————————————————————
+autocmd FileType gitcommit setlocal spell
 
 " ———————————————
 " |   Folding   |
 " ———————————————
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevelstart=99
 set foldexpr=nvim_treesitter#foldexpr()
 
