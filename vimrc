@@ -183,7 +183,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType javascript,typescript,json setl formatexpr=CocAction('formatSelected')
   " Update signature help on jump placeholder.
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
@@ -380,7 +380,7 @@ nmap [h <Plug>(GitGutterPrevHunk)
 " ———————————————————
 set t_Co=256
 let g:airline_powerline_fonts = 1
-let g:airline_theme = 'badwolf'
+let g:airline_theme = 'deus'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_nr_show = 1
 
@@ -424,7 +424,7 @@ set shiftwidth=2  " when indenting with '>', use 4 spaces width
 set softtabstop=2   " Sets the number of columns for a TAB.
 set expandtab   " On pressing tab, insert 4 spaces
 set shiftround " Shift to the next round tab stop.
-set autoindent
+set autoindent " Auto indent
 
 
 " —————————— Vim's Built-in for Autocompleting words ——————————
@@ -449,6 +449,8 @@ vnoremap p "_dP
 " |   Spell checking   |
 " ——————————————————————
 autocmd FileType gitcommit setlocal spell
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
 
 " ———————————————
 " |   Folding   |
