@@ -1,4 +1,6 @@
 {
+  "coc.preferences.formatOnType": true,
+  "coc.preferences.rootPatterns": [".git", ".vscode"],
   "coc.preferences.formatOnSaveFiletypes": [
     "css",
     "html",
