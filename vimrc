@@ -63,7 +63,9 @@ nnoremap  <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
 let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
 " [[B]Commits] Customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+let g:fzf_commits_log_options = '--graph --color=always
+ \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
+ \ - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse'
 " Tell FZF to use RG - so we can skip .gitignore files even if not using
