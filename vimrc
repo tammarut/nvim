@@ -58,6 +58,7 @@ let g:mapleader = "\<Space>" " New map <leader> from \ → spacebar
 " ———————————
 " |   fzf   |
 " ———————————
+nnoremap <C-f> :Rg<CR>
 nnoremap <C-p> :Files<CR>
 nnoremap  <leader>b :Buffers<CR>
 nnoremap <leader>h :History<CR>
