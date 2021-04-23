@@ -17,8 +17,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'dense-analysis/ale'
     " Insert/delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
-    " Go development plugin for Vim
-    " Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
     Plug 'pangloss/vim-javascript'
     " Combine with netrw
@@ -321,9 +319,6 @@ let g:vim_jsx_pretty_highlight_close_tag = 1"
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_flow = 1  " enables syntax highlighting
 
-" ——————————————
-" |   vim-go   |
-" ——————————————
 " Allow backspace to delete indentation and inserted text
 " i.e. how it works in most programs
 " indent  allow backspacing over autoindent
@@ -331,35 +326,6 @@ let g:javascript_plugin_flow = 1  " enables syntax highlighting
 " start   allow backspacing over the start of insert; CTRL-W and CTRL-U
 "        stop once at the start of insert.
 set backspace=indent,eol,start
-
-" go-vim plugin specific commands
-" Also run `goimports` on your current file on every save
-" Might be be slow on large codebases, if so, just comment it out
-" let g:go_fmt_command = "goimports"
-" let g:go_auto_type_info = 1  " Automatically get signature/type info for object under cursor
-" let g:go_highlight_types = 1  " beautify highlight 'type'
-" let g:go_highlight_extra_types = 1
-" let g:go_highlight_functions = 1  " highlight my function and method
-" let g:go_highlight_function_parameters = 1
-" let g:go_highlight_function_calls = 1  " highlight function and method invocations
-" let g:go_highlight_operators = 1  " highlight operators
-" let g:go_auto_sameids = 1
-" let g:go_highlight_array_whitespace_error = 1
-" let g:go_highlight_chan_whitespace_error = 1
-" let g:go_highlight_space_tab_error = 1
-" let g:go_highlight_trailing_whitespace_error = 0
-" let g:go_highlight_fields = 1
-" let g:go_highlight_build_constraints = 1
-" let g:go_highlight_generate_tags = 1
-" let g:go_highlight_string_spellcheck = 1
-" let g:go_highlight_format_strings = 1
-" let g:go_highlight_variable_declarations = 1
-" let g:go_highlight_variable_assignments = 1
-" let g:go_fmt_experimental = 1
-" let g:go_metalinter_autosave=1
-" let g:go_metalinter_autosave_enabled=['golint', 'govet']
-
-
 
 " ——————————————————
 " |   Git Gutter   |
@@ -571,85 +537,6 @@ if executable(s:clip)
 endif
 set clipboard=unnamedplus  " Copy to clipboard "+y
 
-
-" ———————————————————
-" |   Netrw magic   |
-" ———————————————————
-" let g:netrw_banner = 0 "hide netrw top banner
-" let g:netrw_list_hide = '.*\.swap$'  " Hide vim.swp files
-" let g:netrw_liststyle = 3  " Change the directory view in netrw
-" let g:netrw_browse_split = 4 " Open file on same windows vim
-" let g:netrw_winsize = 20 " size of left window
-
-
-" " —————————— Open to Right ——————————
-" function! OpenToRight()
-"         :normal v
-"         let g:path=expand('%:p')
-"         :q!
-"         execute 'belowright vnew' g:path
-"         :normal <C-l>
-" endfunction
-
-" " —————————— Open to Below ——————————
-" function! OpenToBelow()
-"         :normal v
-"         let g:path=expand('%:p')
-"         :q!
-"         execute 'belowright new' g:path
-"         :normal <C-l>
-" endfunction
-
-" " —————————— Mapping key OpenRight/OpenBelow ——————————
-" function! NetrwMappings()
-"         " Hack fix to make ctrl-l work properly
-"         noremap <buffer> <C-l> <C-w>l
-"         noremap <silent> <A-b> :call ToggleNetrw()<CR>
-"         noremap <buffer> V :call OpenToRight()<cr>
-"         noremap <buffer> H :call OpenToBelow()<cr>
-" endfunction
-
-" " —————————— Run Mapping function automatically ——————————
-" augroup netrw_mappings
-"         autocmd!
-"         autocmd filetype netrw call NetrwMappings()
-" augroup END
-
-" " —————————— Allow for netrw to be toggled explorer ——————————
-" let g:NetrwIsOpen=0  " Make sure that netrw is open variable
-" function! ToggleNetrw()
-"     if g:NetrwIsOpen
-"         let i = bufnr("$")
-"         while (i >= 1)
-"             if (getbufvar(i, "&filetype") == "netrw")
-"                 silent exe "bwipeout " . i
-"             endif
-"             let i-=1
-"         endwhile
-"         let g:NetrwIsOpen=0
-"     else
-"         let g:NetrwIsOpen=1
-"         silent Lexplore
-"     endif
-" endfunction
-
-" " Close Netrw if it's the only buffer open
-" " autocmd WinEnter * if winnr('$') == 1 && getbufvar(winbufnr(winnr()), "&filetype") == "netrw" || &buftype == 'quickfix' |q|endif
-
-" " —————————— Open netrw automatically like a project Draw ——————————
-" augroup ProjectDrawer
-"   autocmd!
-"   if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in")
-"       silent exe "bwipeout " . bufnr("$")
-"       exe 'cd '.argv()[0]
-"       autocmd VimEnter * :call ToggleNetrw()
-"   else
-"       autocmd VimEnter * :call ToggleNetrw()
-"       autocmd VimEnter * wincmd p
-"   endif
-" augroup END
-
-
 " —————————————————
 " |   Nvim Tree   |
 " —————————————————
@@ -665,7 +552,6 @@ let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be up
 let g:nvim_tree_indent_markers = 1 "0 by default, this option showr indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_width_allow_resize  = 1 "0 by default, will not resize the tree when opening a file
-
 
 " ———————————————
 " |   Buffers   |
