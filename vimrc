@@ -37,51 +37,65 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Simple indentation guides for your buffers
     Plug 'Yggdroot/indentLine'
     " A command-line fuzzy finder that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+    " Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
     " Searching in Vim as easy as searching in modern editors/IDEs.
-    Plug 'junegunn/fzf.vim'
+    " Plug 'junegunn/fzf.vim'
     " Checkout, create, delete branches and tags with fzf
-    Plug 'stsewd/fzf-checkout.vim'
+    " Plug 'stsewd/fzf-checkout.vim'
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " A file explorer tree for neovim written in lua
     Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
+    " Telescope Find, Filter, Preview, Pick. All lua, all the time.
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
 
 call plug#end()
 
 
 let g:mapleader = "\<Space>" " New map <leader> from \ → spacebar
 
+" —————————————————
+" |   telescope   |
+" —————————————————
+" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files<cr>
+nnoremap <C-f> <cmd>Telescope live_grep<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>gc <cmd>Telescope git_branches<cr>
+
 " ———————————
 " |   fzf   |
 " ———————————
-nnoremap <C-f> :Rg<CR>
-nnoremap <C-p> :Files<CR>
-nnoremap  <leader>b :Buffers<CR>
-nnoremap <leader>h :History<CR>
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
-" [[B]Commits] Customize the options used by 'git log':
-let g:fzf_commits_log_options = '--graph --color=always
- \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
- \ - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
+" nnoremap <C-f> :Rg<CR>
+" nnoremap <C-p> :Files<CR>
+" nnoremap  <leader>b :Buffers<CR>
+" nnoremap <leader>h :History<CR>
+" let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
+" " [[B]Commits] Customize the options used by 'git log':
+" let g:fzf_commits_log_options = '--graph --color=always
+"  \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
+"  \ - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse'
-" Tell FZF to use RG - so we can skip .gitignore files even if not using
-let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
+" let $FZF_DEFAULT_OPTS = '--layout=reverse'
+" " Tell FZF to use RG - so we can skip .gitignore files even if not using
+" let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
 
 " fzf-checkout
-nnoremap <leader>gc :GBranches<CR>
-let g:fzf_branch_actions = {
-      \ 'track': {
-      \   'keymap': 'ctrl-t',
-      \   'prompt': 'Track> ',
-      \   'execute': 'echo system("{git} checkout --track {branch}")',
-      \   'multiple': v:false,
-      \   'required': ['branch'],
-      \   'confirm': v:false
-      \  },
-      \}
+" nnoremap <leader>gc :GBranches<CR>
+" let g:fzf_branch_actions = {
+"       \ 'track': {
+"       \   'keymap': 'ctrl-t',
+"       \   'prompt': 'Track> ',
+"       \   'execute': 'echo system("{git} checkout --track {branch}")',
+"       \   'multiple': v:false,
+"       \   'required': ['branch'],
+"       \   'confirm': v:false
+"       \  },
+"       \}
 
 " ————————————————————
 " |   vim-fugitive   |
@@ -248,7 +262,6 @@ nmap <leader>rr <Plug>(coc-rename)
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
-
 
 " ——————————————————————————————
 " |   Prettier(coc-prettier)   |
@@ -546,12 +559,17 @@ nnoremap <A-f> :NvimTreeFindFile<CR>
 
 let g:nvim_tree_width = 35 "30 by default
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
+let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
 let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
 let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 let g:nvim_tree_indent_markers = 1 "0 by default, this option showr indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_width_allow_resize  = 1 "0 by default, will not resize the tree when opening a file
+let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
+let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
 
 " ———————————————
 " |   Buffers   |
