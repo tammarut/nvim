@@ -60,12 +60,12 @@ let g:mapleader = "\<Space>" " New map <leader> from \ → spacebar
 " —————————————————
 " |   telescope   |
 " —————————————————
-" Find files using Telescope command-line sugar.
-nnoremap <C-p> <cmd>Telescope find_files<cr>
-nnoremap <C-f> <cmd>Telescope live_grep<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>gc <cmd>Telescope git_branches<cr>
+" Using lua functions
+nnoremap <C-p> <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <C-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_branches()<cr>
 
 " ———————————
 " |   fzf   |
