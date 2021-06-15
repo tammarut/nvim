@@ -6,9 +6,11 @@
     "html",
     "javascript",
     "javascript.jsx",
+    "javascriptreact",
     "json",
     "typescript",
     "typescript.tsx",
     "typscriptreact"
-  ]
+  ],
+  "tsserver.formatOnType": true
 }

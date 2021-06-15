@@ -13,19 +13,20 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " lean & mean status/tabline for vim that's light as air
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
-    " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
-    Plug 'dense-analysis/ale'
     " Insert/delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
-    " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
-    Plug 'pangloss/vim-javascript'
     " Combine with netrw
     Plug 'tpope/vim-vinegar'
     " Surroundings": parentheses, brackets, quotes, XML tags, and more
     Plug 'tpope/vim-surround'
+    " Check syntax in Vim asynchronously and fix files, with Language Server Protocol (LSP) support
+    Plug 'dense-analysis/ale'
+    " JavaScript bundle for vim, this bundle provides syntax highlighting and improved indentation.
+    Plug 'pangloss/vim-javascript'
     " The React syntax highlighting and indenting plugin for vim. Also supports the typescript tsx file.
     Plug 'maxmellon/vim-jsx-pretty'
-    Plug 'HerringtonDarkholme/yats.vim'
+    " TypeScript syntax
+    Plug 'leafgarland/typescript-vim'
     " Auto close (X)HTML tags
     Plug 'alvan/vim-closetag'
     " gruvbox skins
@@ -396,7 +397,7 @@ augroup END
 " |   indentLine   |
 " —————————————————
 let g:indentLine_color_term = 239
-let g:indentLine_char = '┊'
+let g:indentLine_char = '┆'
 
 " ———————————
 " |   Tab   |
