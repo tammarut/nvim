@@ -52,6 +52,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    " Smooth scrolling
+    Plug 'psliwka/vim-smoothie'
 
 call plug#end()
 
@@ -114,7 +116,7 @@ nmap <leader>gh :diffget //3<CR>
 " ————————————————————
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = '*.html,*.jsx,*.tsx,*.md'
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.tsx,*.md'
 
 
 " ——————————————————————————————————
