@@ -56,6 +56,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'psliwka/vim-smoothie'
     " Lightning fast left-right movement (highlight for a unique character in every word on a line to help you use f, F and family)
     Plug 'unblevable/quick-scope'
+    " vim-snipmate default snippets contains snippets files for various programming languages.
+    Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -129,7 +131,7 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.tsx,*.md'
 " ——————————————————————————————————
 " |   Coc(Conquer of Completion)   |
 " ——————————————————————————————————
-let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-html', 'coc-css', 'coc-json']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-html', 'coc-css', 'coc-json', 'coc-snippets']
 let g:coc_disable_startup_warning = 1
 
 " TextEdit might fail if hidden is not set.
@@ -272,6 +274,22 @@ nmap <leader>rr <Plug>(coc-rename)
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nmap <silent> <leader>gp <Plug>(coc-diagnostic-prev-error)
 nmap <silent> <leader>gn <Plug>(coc-diagnostic-next-error)
+
+" ——————————————————————————————————
+" |   vim-snippets(coc-snippets)   |
+" ——————————————————————————————————
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 " ——————————————————————————————
 " |   Prettier(coc-prettier)   |
