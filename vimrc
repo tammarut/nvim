@@ -54,6 +54,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-telescope/telescope.nvim'
     " Smooth scrolling
     Plug 'psliwka/vim-smoothie'
+    " Lightning fast left-right movement (highlight for a unique character in every word on a line to help you use f, F and family)
+    Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -69,6 +71,11 @@ nnoremap <C-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_branches()<cr>
+
+" ———————————————————
+" |   quick-scope   |
+" ———————————————————
+source $HOME/.config/nvim/plugin-config/quickscope.vim
 
 " ———————————
 " |   fzf   |
@@ -581,6 +588,6 @@ let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automaticall
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 " ———————— Remapping key(work around buffers) —————————
-nnoremap  <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
-nnoremap  <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nnoremap <silent> <leader>d :lclose<bar>b#<bar>bd #<CR>
