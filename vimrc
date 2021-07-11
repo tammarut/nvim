@@ -8,8 +8,6 @@
 call plug#begin('~/.config/nvim/autoload/plugged')
     " Neovim, full language server protocol support as VSCode
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " shows git diff markers in the sign column and stages/previews/undoes hunks and partial hunks.
-    Plug 'airblade/vim-gitgutter'
     " lean & mean status/tabline for vim that's light as air
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
@@ -58,6 +56,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'unblevable/quick-scope'
     " vim-snipmate default snippets contains snippets files for various programming languages.
     Plug 'honza/vim-snippets'
+    " shows git diff markers in the sign column and stages/previews/undoes hunks and partial hunks (Git signs written in pure lua)
+    Plug 'lewis6991/gitsigns.nvim'
 
 call plug#end()
 
@@ -367,23 +367,6 @@ let g:javascript_plugin_flow = 1  " enables syntax highlighting
 " start   allow backspacing over the start of insert; CTRL-W and CTRL-U
 "        stop once at the start of insert.
 set backspace=indent,eol,start
-
-" ——————————————————
-" |   Git Gutter   |
-" ——————————————————
-highlight GitGutterAdd guifg=#009900 ctermfg=Green
-highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
-highlight GitGutterDelete guifg=#ff2222 ctermfg=Red
-let g:gitgutter_enabled = 1
-let g:gitgutter_sign_added = '✚'
-let g:gitgutter_sign_modified = '✹'
-let g:gitgutter_sign_removed = '-'
-let g:gitgutter_sign_removed_first_line = '-'
-let g:gitgutter_sign_modified_removed = '-'
-
-" Jump between hunks(code changed)
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
 
 " ———————————————————
 " |   Vim airline   |

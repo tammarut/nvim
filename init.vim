@@ -4,3 +4,4 @@ let &packpath = &runtimepath
 
 source ~/.config/nvim/vimrc
 luafile ~/.config/nvim/lua/treesitter.lua
+luafile ~/.config/nvim/lua/gitsigns.lua
