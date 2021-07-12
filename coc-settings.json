@@ -1,4 +1,5 @@
 {
+  "coc.preferences.colorSupport": false,
   "coc.preferences.formatOnType": true,
   "coc.preferences.rootPatterns": [".git", ".vscode"],
   "coc.preferences.formatOnSaveFiletypes": [
@@ -10,7 +11,7 @@
     "json",
     "typescript",
     "typescript.tsx",
-    "typscriptreact"
+    "typescriptreact"
   ],
   "tsserver.formatOnType": true
 }

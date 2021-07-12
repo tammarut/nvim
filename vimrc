@@ -29,6 +29,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " gruvbox skins
     Plug 'sainnhe/gruvbox-material'
+    " A clean, dark vim colorscheme
+    Plug 'ghifarit53/tokyonight-vim'
+    " rainbow parenthesis
+    Plug 'luochen1990/rainbow'
     " Git wrapper
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
@@ -344,6 +348,7 @@ highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_save = 1
 let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma none'
+let g:ale_javascript_prettier_use_local_config = 1
 
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
@@ -397,6 +402,9 @@ set lazyredraw  "redraw only when we need to
 set timeoutlen=500  " By default timeoutlen is 1000 ms"
 set showmatch  "highlight matching [{()}]
 set autowrite
+set redrawtime=10000
+set synmaxcol=180
+set re=1
 " Change how vim represents characters on the screen
 set encoding=utf-8
 
@@ -442,7 +450,7 @@ inoremap <expr> <CR> pumvisible() ? "<C-y>" : "<CR>"
 noremap x "_x
 " paste in visual mode without updating the default register
 vnoremap p "_dP
-
+vnoremap d "_d
 
 
 " ——————————————————————
@@ -477,6 +485,9 @@ nnoremap <C-s> :w<cr>
 " Move to beginning/end of line
 nnoremap B ^
 nnoremap E $
+" New line in normal mode and back
+map <Enter> o<ESC>
+map <S-Enter> O<ESC>
 
 " —————————————————————
 " |   Mouse enabled   |
@@ -526,13 +537,25 @@ set background=dark
 " set contrast
 " this configuration option should be placed before `colorscheme
 " available values: 'hard', 'medium'(default), 'soft'
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_invert_selection='0'
-colorscheme gruvbox-material
+" let g:gruvbox_material_background = 'hard'
+" let g:gruvbox_material_palette = 'material'
+" let g:gruvbox_invert_selection='0'
+" let g:gruvbox_material_enable_italic = 1
+" let g:gruvbox_material_diagnostic_text_highlight = 1
+" let g:gruvbox_material_diagnostic_line_highlight = 1
+" colorscheme gruvbox-material
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
+
+" ————————————————————————
+" |   Rainbow brackets   |
+" ————————————————————————
+let g:rainbow_active = 1
 
 " —————————————————————————
 " |   Search(highlight)   |
