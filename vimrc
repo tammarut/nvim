@@ -58,6 +58,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'honza/vim-snippets'
     " shows git diff markers in the sign column and stages/previews/undoes hunks and partial hunks (Git signs written in pure lua)
     Plug 'lewis6991/gitsigns.nvim'
+    " Jump to any location specified by two characters
+    Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
@@ -78,6 +80,11 @@ nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_branches()<cr>
 " |   quick-scope   |
 " ———————————————————
 source $HOME/.config/nvim/plugin-config/quickscope.vim
+
+" —————————————————
+" |   vim-sneak   |
+" —————————————————
+source $HOME/.config/nvim/plugin-config/vim-sneak.vim
 
 " ———————————
 " |   fzf   |
@@ -581,6 +588,7 @@ let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folde
 let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
 let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
 let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
+let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
 
 " ———————————————
 " |   Buffers   |
