@@ -31,8 +31,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'sainnhe/gruvbox-material'
     " A clean, dark vim colorscheme
     Plug 'ghifarit53/tokyonight-vim'
-    " rainbow parenthesis
-    Plug 'luochen1990/rainbow'
     " Git wrapper
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
@@ -47,6 +45,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " Plug 'stsewd/fzf-checkout.vim'
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    " Rainbow parentheses for neovim using tree-sitter
+    Plug 'p00f/nvim-ts-rainbow'
     " A file explorer tree for neovim written in lua
     Plug 'kyazdani42/nvim-web-devicons' " for file icons
     Plug 'kyazdani42/nvim-tree.lua'
@@ -546,16 +546,13 @@ set background=dark
 " colorscheme gruvbox-material
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
 colorscheme tokyonight
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
-
-" ————————————————————————
-" |   Rainbow brackets   |
-" ————————————————————————
-let g:rainbow_active = 1
 
 " —————————————————————————
 " |   Search(highlight)   |
