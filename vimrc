@@ -11,6 +11,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     " lean & mean status/tabline for vim that's light as air
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
+    " Buffer line (with minimal tab integration) for Neovim built using lua.
+    Plug 'akinsho/nvim-bufferline.lua'
     " Insert/delete brackets, parens, quotes in pair
     Plug 'jiangmiao/auto-pairs'
     " Combine with netrw
@@ -386,8 +388,6 @@ set backspace=indent,eol,start
 set t_Co=256
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'deus'
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
 
 " ——————————————————————
 " |   Normal setting   |
@@ -599,7 +599,7 @@ let g:nvim_tree_width = 35 "30 by default
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
 let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
 let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_auto_close = 0 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 let g:nvim_tree_indent_markers = 1 "0 by default, this option showr indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).

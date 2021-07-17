@@ -6,3 +6,4 @@ source ~/.config/nvim/vimrc
 luafile ~/.config/nvim/lua/treesitter.lua
 luafile ~/.config/nvim/lua/gitsigns.lua
 luafile ~/.config/nvim/lua/neoscrolls.lua
+luafile ~/.config/nvim/lua/bufferline.lua
