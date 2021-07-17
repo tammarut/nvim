@@ -8,9 +8,8 @@
 call plug#begin('~/.config/nvim/autoload/plugged')
     " Neovim, full language server protocol support as VSCode
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    " lean & mean status/tabline for vim that's light as air
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    " A blazing fast and easy to configure neovim statusline written in pure lua
+    Plug 'hoob3rt/lualine.nvim'
     " Buffer line (with minimal tab integration) for Neovim built using lua.
     Plug 'akinsho/nvim-bufferline.lua'
     " Insert/delete brackets, parens, quotes in pair
@@ -258,11 +257,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{FugitiveStatusline()}
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -381,13 +375,6 @@ let g:javascript_plugin_flow = 1  " enables syntax highlighting
 " start   allow backspacing over the start of insert; CTRL-W and CTRL-U
 "        stop once at the start of insert.
 set backspace=indent,eol,start
-
-" ———————————————————
-" |   Vim airline   |
-" ———————————————————
-set t_Co=256
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'deus'
 
 " ——————————————————————
 " |   Normal setting   |
