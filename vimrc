@@ -54,8 +54,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
-    " Smooth scrolling
-    Plug 'psliwka/vim-smoothie'
+    " Smooth scrolling neovim plugin written in lua
+    Plug 'karb94/neoscroll.nvim'
     " Lightning fast left-right movement (highlight for a unique character in every word on a line to help you use f, F and family)
     Plug 'unblevable/quick-scope'
     " vim-snipmate default snippets contains snippets files for various programming languages.
