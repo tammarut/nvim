@@ -33,11 +33,11 @@ require('gitsigns').setup {
     interval = 1000,
     follow_files = true
   },
-  current_line_blame = false,
+  current_line_blame = true,
   current_line_blame_delay = 1000,
   current_line_blame_position = 'eol',
   sign_priority = 6,
-  update_debounce = 100,
+  update_debounce = 300,
   status_formatter = nil, -- Use default
   word_diff = false,
   use_decoration_api = true,
