@@ -525,7 +525,7 @@ set background=dark
 " this configuration option should be placed before `colorscheme
 " available values: 'hard', 'medium'(default), 'soft'
 " let g:gruvbox_material_background = 'hard'
-" let g:gruvbox_material_palette = 'material'
+" let g:gruvbox_material_palette = 'mix'
 " let g:gruvbox_invert_selection='0'
 " let g:gruvbox_material_enable_italic = 1
 " let g:gruvbox_material_diagnostic_text_highlight = 1
