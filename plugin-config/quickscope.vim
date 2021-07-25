@@ -8,5 +8,6 @@ augroup qs_colors
   autocmd ColorScheme * highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
 augroup END
 
-let g:qs_max_chars=150
+let g:qs_max_chars=250
 let g:qs_buftype_blacklist = ['terminal', 'nofile']
+let g:qs_filetype_blacklist = ['dashboard', 'startify']
