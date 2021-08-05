@@ -4,7 +4,7 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-" 🗽Initialize plugin system
+" 👋 Initialize plugin system
 call plug#begin('~/.config/nvim/autoload/plugged')
     " Neovim, full language server protocol support as VSCode
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -38,12 +38,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-commentary'
     " Simple indentation guides for your buffers
     Plug 'Yggdroot/indentLine'
-    " A command-line fuzzy finder that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.
-    " Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-    " Searching in Vim as easy as searching in modern editors/IDEs.
-    " Plug 'junegunn/fzf.vim'
-    " Checkout, create, delete branches and tags with fzf
-    " Plug 'stsewd/fzf-checkout.vim'
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " Rainbow parentheses for neovim using tree-sitter
@@ -65,6 +59,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'lewis6991/gitsigns.nvim'
     " Jump to any location specified by two characters
     Plug 'justinmk/vim-sneak'
+    " Neovim motions on speed(EasyMotion clone)
+    Plug 'phaazon/hop.nvim'
 
 call plug#end()
 
@@ -524,18 +520,19 @@ set background=dark
 " set contrast
 " this configuration option should be placed before `colorscheme
 " available values: 'hard', 'medium'(default), 'soft'
-" let g:gruvbox_material_background = 'hard'
-" let g:gruvbox_material_palette = 'mix'
-" let g:gruvbox_invert_selection='0'
-" let g:gruvbox_material_enable_italic = 1
-" let g:gruvbox_material_diagnostic_text_highlight = 1
-" let g:gruvbox_material_diagnostic_line_highlight = 1
-" colorscheme gruvbox-material
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:tokyonight_italic_functions = 1
-let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-colorscheme tokyonight
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_palette = 'mix'
+let g:gruvbox_invert_selection='0'
+let g:gruvbox_material_enable_italic = 1
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_diagnostic_text_highlight = 1
+let g:gruvbox_material_diagnostic_line_highlight = 1
+colorscheme gruvbox-material
+" let g:tokyonight_style = 'night' " available: night, storm
+" let g:tokyonight_enable_italic = 1
+" let g:tokyonight_italic_functions = 1
+" let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+" colorscheme tokyonight
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
@@ -551,7 +548,7 @@ set incsearch " Highlight while search
 
 
 " Press <leader> Enter to remove search highlights
-noremap <silent> <leader><cr> :noh<cr>
+noremap <silent> <leader><cr> :nohl<cr>
 
 " ▶ Keep search results at the center of screen
 nnoremap n nzz

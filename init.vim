@@ -8,3 +8,4 @@ luafile ~/.config/nvim/lua/gitsigns.lua
 luafile ~/.config/nvim/lua/neoscrolls.lua
 luafile ~/.config/nvim/lua/bufferline.lua
 luafile ~/.config/nvim/lua/status-lualine.lua
+luafile ~/.config/nvim/lua/hhop.lua
