@@ -36,8 +36,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
     Plug 'tpope/vim-commentary'
-    " Simple indentation guides for your buffers
-    Plug 'Yggdroot/indentLine'
+    " Indent guides for Neovim(Lua)
+    Plug 'lukas-reineke/indent-blankline.nvim'
     " Nvim Treesitter configurations and abstraction layer
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " Rainbow parentheses for neovim using tree-sitter
@@ -404,8 +404,8 @@ augroup END
 " —————————————————
 " |   indentLine   |
 " —————————————————
-let g:indentLine_color_term = 239
-let g:indentLine_char = '┆'
+let g:indent_blankline_use_treesitter = v:true
+let g:indent_blankline_show_current_context = v:true
 
 " ———————————
 " |   Tab   |
@@ -488,8 +488,8 @@ nnoremap <C-j> <C-w><C-j>
 " Use alt + hjkl to resize windows
 nnoremap <A-j> :resize -2<CR>
 nnoremap <A-k> :resize +2<CR>
-nnoremap <A-h> :vertical resize -2<CR>
-nnoremap <A-l> :vertical resize +2<CR>
+nnoremap <A-l> :vertical resize -2<CR>
+nnoremap <A-h> :vertical resize +2<CR>
 
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
@@ -524,15 +524,16 @@ let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_palette = 'mix'
 let g:gruvbox_invert_selection='0'
 let g:gruvbox_material_enable_italic = 1
-let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_diagnostic_text_highlight = 1
 let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_better_performance = 1
 colorscheme gruvbox-material
 " let g:tokyonight_style = 'night' " available: night, storm
 " let g:tokyonight_enable_italic = 1
 " let g:tokyonight_italic_functions = 1
 " let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
 " colorscheme tokyonight
+
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
