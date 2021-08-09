@@ -76,6 +76,7 @@ nnoremap <C-f> <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_branches()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').spell_suggest()<cr>
 
 " ———————————————————
 " |   quick-scope   |
@@ -401,12 +402,6 @@ augroup syntaxSyncMinLines
     autocmd!
     autocmd Syntax * syntax sync minlines=2000
 augroup END
-
-" —————————————————
-" |   indentLine   |
-" —————————————————
-let g:indent_blankline_use_treesitter = v:true
-let g:indent_blankline_show_current_context = v:true
 
 " ———————————
 " |   Tab   |
