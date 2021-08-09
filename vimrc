@@ -141,6 +141,7 @@ let g:closetag_filenames = '*.html,*.js,*.jsx,*.tsx,*.md'
 " ——————————————————————————————————
 let g:coc_global_extensions = ['coc-tsserver', 'coc-prettier', 'coc-html', 'coc-css', 'coc-json', 'coc-snippets']
 let g:coc_disable_startup_warning = 1
+let g:coc_disable_transparent_cursor = 1
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -595,13 +596,15 @@ let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
 let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
 let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
 
-" ———————————————
-" |   Buffers   |
-" ———————————————
+" ———————————————————————
+" |   nvim-bufferline   |
+" ———————————————————————
 " Per default, netrw leaves unmodified buffers open. This autocommand
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 " ———————— Remapping key(work around buffers) —————————
-nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
-nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+" These commands will navigate through buffers in order regardless of which mode you are using
+" e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
+nnoremap <silent> <tab> :BufferLineCycleNext<CR>
+nnoremap <silent> <s-tab> :BufferLineCyclePrev<CR>
 nnoremap <silent> <leader>d :lclose<bar>b#<bar>bd #<CR>
