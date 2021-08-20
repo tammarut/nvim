@@ -7,8 +7,8 @@ require('lualine').setup {
     disabled_filetypes = {}
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diff'},
+    lualine_a = {'mode', 'paste'},
+    lualine_b = {'branch', { 'diff', color_added = '#8cb856', color_modified = '#ffdf1b', color_removed = '#ff6666' }},
     lualine_c = {'filename'},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
