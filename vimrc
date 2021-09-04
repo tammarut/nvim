@@ -77,6 +77,8 @@ nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_branches()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').spell_suggest()<cr>
+nnoremap <leader>fp <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').builtin()<cr>
 
 " ———————————————————
 " |   quick-scope   |
@@ -87,36 +89,6 @@ source $HOME/.config/nvim/plugin-config/quickscope.vim
 " |   vim-sneak   |
 " —————————————————
 source $HOME/.config/nvim/plugin-config/vim-sneak.vim
-
-" ———————————
-" |   fzf   |
-" ———————————
-" nnoremap <C-f> :Rg<CR>
-" nnoremap <C-p> :Files<CR>
-" nnoremap  <leader>b :Buffers<CR>
-" nnoremap <leader>h :History<CR>
-" let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.9, 'height': 0.7,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp'  } }
-" " [[B]Commits] Customize the options used by 'git log':
-" let g:fzf_commits_log_options = '--graph --color=always
-"  \ --date=human --format="%C(#e3c78a)%h%C(#ff5454)%d%C(reset)
-"  \ - %C(#36c692)(%ad)%C(reset) %s %C(#80a0ff){%an}%C(reset)"'
-
-" let $FZF_DEFAULT_OPTS = '--layout=reverse'
-" " Tell FZF to use RG - so we can skip .gitignore files even if not using
-" let $FZF_DEFAULT_COMMAND="rg --files --hidden -g '!.git'"
-
-" fzf-checkout
-" nnoremap <leader>gc :GBranches<CR>
-" let g:fzf_branch_actions = {
-"       \ 'track': {
-"       \   'keymap': 'ctrl-t',
-"       \   'prompt': 'Track> ',
-"       \   'execute': 'echo system("{git} checkout --track {branch}")',
-"       \   'multiple': v:false,
-"       \   'required': ['branch'],
-"       \   'confirm': v:false
-"       \  },
-"       \}
 
 " ————————————————————
 " |   vim-fugitive   |
@@ -501,7 +473,7 @@ vnoremap <C-Up> :m '<-2<CR>gv=gv
 " ————————————————
 " |   Terminal   |
 " ————————————————
-noremap <Leader>t :below 10sp term://zsh<CR>
+" noremap <Leader>t :below 10sp term://zsh<CR>
 tnoremap hh <C-\><C-n>
 
 " ————————————————————
@@ -522,11 +494,13 @@ let g:gruvbox_invert_selection='0'
 let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_diagnostic_text_highlight = 1
 let g:gruvbox_material_diagnostic_line_highlight = 1
+let g:gruvbox_material_current_word = 'bold'
 let g:gruvbox_material_better_performance = 1
 colorscheme gruvbox-material
 " let g:tokyonight_style = 'night' " available: night, storm
 " let g:tokyonight_enable_italic = 1
 " let g:tokyonight_italic_functions = 1
+" let g:tokyonight_current_word = 'bold'
 " let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
 " colorscheme tokyonight
 
@@ -580,15 +554,15 @@ let g:nvim_tree_width = 35 "30 by default
 let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache'   ]
 let g:nvim_tree_auto_ignore_ft = [ 'startify', 'dashboard' ] "empty by default, don't auto open tree on specific filetypes.
 let g:nvim_tree_auto_open = 1 "0 by default, opens the tree when typing `vim $DIR` or `vim`
-let g:nvim_tree_auto_close = 0 "0 by default, closes the tree when it's the last window
+let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
 let g:nvim_tree_follow = 1 "0 by default, this option allows the cursor to be updated when entering a buffer
 let g:nvim_tree_indent_markers = 1 "0 by default, this option showr indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_width_allow_resize  = 1 "0 by default, will not resize the tree when opening a file
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
 let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
-let g:nvim_tree_disable_netrw = 0 "1 by default, disables netrw
-let g:nvim_tree_hijack_netrw = 0 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
+let g:nvim_tree_disable_netrw = 1 "1 by default, disables netrw
+let g:nvim_tree_hijack_netrw = 1 "1 by default, prevents netrw from automatically opening when opening directories (but lets you keep its other utilities)
 let g:nvim_tree_lsp_diagnostics = 1 "0 by default, will show lsp diagnostics in the signcolumn. See :help nvim_tree_lsp_diagnostics
 
 " ———————————————————————
