@@ -10,3 +10,5 @@ luafile ~/.config/nvim/lua/bufferline.lua
 luafile ~/.config/nvim/lua/status-lualine.lua
 luafile ~/.config/nvim/lua/hhop.lua
 luafile ~/.config/nvim/lua/indent-line.lua
+luafile ~/.config/nvim/lua/nvim-tree.lua
+luafile ~/.config/nvim/lua/nvim-toggleterm.lua
