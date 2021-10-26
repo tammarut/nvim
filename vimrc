@@ -61,6 +61,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'justinmk/vim-sneak'
     " Neovim motions on speed(EasyMotion clone)
     Plug 'phaazon/hop.nvim'
+    " Manage multiple terminal windows
+    Plug 'akinsho/nvim-toggleterm.lua'
 
 call plug#end()
 
