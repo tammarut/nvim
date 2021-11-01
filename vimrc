@@ -275,24 +275,13 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 " ——————————————————————————————
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
-" —————————————————————
-" |   YML formatter   |
-" —————————————————————
-" Skip re-indenting lines after a comment #, after a colon : or at the
-" beginning of a line.
-" ts (tabstop) a <Tab> key will count as two spaces
-" sw (shiftwidth) identation and auto-identation will use two spaces (eg. when
-" using >> or gg=G)
-" sts (softtabstop) a <Tab> will count for two spaces when expanding tabs
-" (inserting a tab, or using the Backspace key)
-" expandttab use spaces instead of tabs
-" foldmethod folding will be based on indentation levels
-" nofoldenable the file will be opened without any folds
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab indentkeys-=0# indentkeys-=<:> foldmethod=indent nofoldenable
-
 " —————————————————————————————————————
 " |   ale(Asynchronous Lint Engine)   |
 " —————————————————————————————————————
+set omnifunc=ale#completion#OmniFunc
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+let g:ale_sign_column_always = 1
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tsserver', 'tslint'],
@@ -307,8 +296,8 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace']
 \}
 
-let g:ale_sign_error = '❌'
-let g:ale_sign_warning = '❗'
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = ''
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 'never'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
@@ -317,9 +306,8 @@ let g:ale_linters_explicit = 1
 let g:ale_lint_on_save = 1
 let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma none'
 let g:ale_javascript_prettier_use_local_config = 1
-
 " Set this variable to 1 to fix files when you save them.
-let g:ale_fix_on_save = 1
+" let g:ale_fix_on_save = 1
 
 
 " ——————————————————————————————————————
