@@ -9,19 +9,23 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.line_wrap_cursor_movement = true
+lvim.line_wrap_cursor_movement = false
 lvim.format_on_save = true
+lvim.transparent_window = false
+lvim.debug = false
 vim.opt.relativenumber = true
-vim.opt.timeoutlen = 200 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 150 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.wrap = true
+
 
 -- ——————————————————————————
 -- |   ColorScheme (skin)   |
 -- ——————————————————————————
 lvim.colorscheme = "onedarker"
-vim.g.tokyonight_style = "storm"
-vim.g.tokyonight_enable_italic = true
-vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
-vim.g.tokyonight_italic_functions = true
+-- vim.g.tokyonight_style = "storm"
+-- vim.g.tokyonight_enable_italic = true
+-- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
+-- vim.g.tokyonight_italic_functions = true
 
 -- ———————————————
 -- |   Folding   |
@@ -202,31 +206,34 @@ lvim.builtin.gitsigns.opts.current_line_blame_formatter_opts = {
 -- |   Treesitter   |
 -- ——————————————————
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = {
-  "bash",
-  "lua",
-  "c",
-  "javascript",
-  "python",
-  "typescript",
-  "go",
-  "godotResource",
-  "gomod",
-  "json",
-  "css",
-  "yaml",
-}
+lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
-lvim.builtin.treesitter.rainbow = { enable = true }
+lvim.builtin.treesitter.autotag = {
+  enable = true,
+  disable = { "xml" },
+}
+lvim.builtin.treesitter.rainbow = {
+  enable = true,
+  colors = {
+    "Gold",
+    "LawnGreen",
+    "DodgerBlue",
+    -- "Cornsilk",
+    -- "Salmon",
+    -- "Orchid",
+  },
+  disable = { "html" },
+}
 lvim.builtin.treesitter.rainbow.extended_mode = true
 
 -- ————————————————————
 -- |   LSP settings   |
 -- ————————————————————
 -- ---@usage disable automatic installation of servers
--- lvim.lsp.automatic_servers_installation = false
-
+lvim.lsp.automatic_servers_installation = true
+lvim.lsp.diagnostics.virtual_text = true
+-- require'lspconfig'.gopls.setup{}
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
 -- vim.list_extend(lvim.lsp.override, { "pyright" })
@@ -262,11 +269,9 @@ lvim.builtin.treesitter.rainbow.extended_mode = true
 
 -- set a formatter, this will override the language server formatting capabilities (if it exists)
 -- local formatters = require "lvim.lsp.null-ls.formatters"
--- formatters.setup ({
---   { exe = "black" },
+-- formatters.setup {
 --   {
 --     exe = "prettier",
---     -- args = { "--print-with", "120" },
 --     filetypes = {
 --       "javascriptreact",
 --       "javascript",
@@ -275,11 +280,12 @@ lvim.builtin.treesitter.rainbow.extended_mode = true
 --       "json",
 --       "markdown",
 --     },
+--     args = { "--print-with", "120", "--no-semi", "--single-quote", "--jsx-single-quote" },
 --   }
--- })
+-- }
 -- local formatters = require "lvim.lsp.null-ls.formatters"
 -- formatters.setup {
---  { exe = "black" },
+--   -- { exe = "black" },
 --   {
 --     exe = "prettier",
 --     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
@@ -301,12 +307,12 @@ lvim.builtin.treesitter.rainbow.extended_mode = true
 --   },
 -- }
 -- linters.setup {
---   { exe = "black" },
-  -- {
-  --   exe = "eslint_d",
-  --   ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
-  --   filetypes = { "javascript", "javascriptreact" },
-  -- },
+--   -- { exe = "black" },
+--   {
+--     exe = "eslint_d"
+--     ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+--     -- filetypes = { "javascript", "javascriptreact" },
+--   },
 -- }
 
 -- ——————————————————————————
@@ -317,6 +323,13 @@ lvim.plugins = {
     {"folke/tokyonight.nvim"},
     -- Rainbow parentheses for neovim using tree-sitter
     {"p00f/nvim-ts-rainbow"},
+    -- {
+    --   "windwp/nvim-s-autotag",
+    --    event = "InsertEnter",
+    --    config = function()
+    --      require("nvim-ts-autotag").setup()
+    --    end,
+    -- },
     -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
     {
       "sindrets/diffview.nvim",
@@ -328,7 +341,7 @@ lvim.plugins = {
       config = function ()
         local neogit = require("neogit")
         neogit.setup {
-          integrations = {diffview = true}
+          integrations = { diffview = true }
         }
       end
     },
@@ -342,12 +355,7 @@ lvim.plugins = {
       "phaazon/hop.nvim",
       event = "BufRead",
       config = function()
-        require("hop").setup()
-        vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-        vim.api.nvim_set_keymap("n", "S", ":HopLineStart<cr>", {})
-        vim.api.nvim_set_keymap("n", "<space>h", ":HopWord<cr>", { silent = true })
-        vim.api.nvim_set_keymap('n', 'f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<cr>", {})
-        vim.api.nvim_set_keymap('n', 'F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<cr>", {})
+        require("user.hop").config()
       end,
     },
     -- Surroundings: parentheses, brackets, quotes, XML tags, and more
@@ -359,18 +367,8 @@ lvim.plugins = {
     {
       "lukas-reineke/indent-blankline.nvim",
       event = "BufRead",
-      setup = function()
-        vim.g.indentLine_enabled = 1
-        vim.g.indent_blankline_char = "▏"
-        vim.g.indent_blankline_use_treesitter = true
-        vim.g.indent_blankline_show_current_context = true
-        vim.g.indent_blankline_context_patterns = {"class", "return", "function", "arrow", "method", "^if", "^while", "^for", "^object", "^table", "block", "arguments", "if_statement", "else_clause", "jsx_element", "jsx_self_closing_element", "try_statement", "catch_clause"}
-        vim.g.indent_blankline_filetype_exclude = {"help", "terminal", "dashboard", "markdown", "git", "NvimTree", "packer", "Trouble"}
-        vim.g.indent_blankline_buftype_exclude = {"terminal"}
-        vim.g.indent_blankline_show_trailing_blankline_indent = false
-        vim.g.indent_blankline_show_first_indent_level = false
-        -- HACK: work-around for https://github.com/lukas-reineke/indent-blankline.nvim/issues/59
-        vim.wo.colorcolumn = "99999"
+      config = function()
+        require("user.indent-line").config()
       end
     },
     -- Smooth scrolling neovim plugin written in .lua
@@ -378,26 +376,31 @@ lvim.plugins = {
       "karb94/neoscroll.nvim",
       event = "WinScrolled",
       config = function()
-        require('neoscroll').setup({
-          -- All these keys will be mapped to their corresponding default scrolling animation
-          mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
-            '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
-          hide_cursor = true,          -- Hide cursor while scrolling
-          stop_eof = true,             -- Stop at <EOF> when scrolling downwards
-          use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
-          respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
-          cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
-          easing_function = nil,        -- Default easing function
-          pre_hook = nil,              -- Function to run before the scrolling animation starts
-          post_hook = nil,              -- Function to run after the scrolling animation ends
-        })
+       require("user.neoscroll").config()
       end
+    },
+    {
+      "tzachar/cmp-tabnine",
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      config = function()
+        local tabnine = require "cmp_tabnine.config"
+        tabnine:setup {
+          max_lines = 1000,
+          max_num_results = 20,
+          sort = true,
+          run_on_every_keystroke = true,
+          snippet_placeholder = '..'
+        }
+      end,
+
     },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
   { "BufWinEnter", "gitcommit", "setlocal spell" },
+   -- On entering insert mode in any file, scroll the window so the cursor line is centered
+  { "InsertEnter", "*", ":normal zz" },
 }
-
-
