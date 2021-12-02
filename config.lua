@@ -7,21 +7,28 @@ a global executable or a path to
 an executable
 ]]
 
--- general
+-- ————————————————
+-- |   General    |
+-- ————————————————
 lvim.log.level = "warn"
 lvim.line_wrap_cursor_movement = false
 lvim.format_on_save = true
 lvim.transparent_window = false
 lvim.debug = false
 vim.opt.relativenumber = true
-vim.opt.timeoutlen = 150 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 100 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.wrap = true
 
 
 -- ——————————————————————————
 -- |   ColorScheme (skin)   |
 -- ——————————————————————————
-lvim.colorscheme = "onedarker"
+lvim.colorscheme = "gruvbox-material"
+vim.g.gruvbox_material_background = "hard"
+vim.g.gruvbox_material_palette = "mix"
+vim.g.gruvbox_material_enable_italic = 1
+vim.g.gruvbox_material_better_performance = 1
+
 -- vim.g.tokyonight_style = "storm"
 -- vim.g.tokyonight_enable_italic = true
 -- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
@@ -53,6 +60,17 @@ lvim.keys.normal_mode["E"] = "$"
 -- New line in normal mode and back above
 lvim.keys.normal_mode["<Enter>"] = "o<ESC>"
 lvim.keys.normal_mode["<S-Enter>"] = "O<ESC>"
+-- Copy here until the end line
+lvim.keys.normal_mode["Y"] = "y$"
+-- ▶ Keep search results at the center of screen
+lvim.keys.normal_mode["n"] = "nzzzv"
+lvim.keys.normal_mode["N"] = "Nzzzv"
+lvim.keys.normal_mode["J"] = "mzJ`z"
+-- Undo break points
+lvim.keys.insert_mode[","] = ",<C-g>u"
+lvim.keys.insert_mode["."] = ".<C-g>u"
+lvim.keys.insert_mode["!"] = "!<C-g>u"
+lvim.keys.insert_mode["?"] = "?<C-g>u"
 
 --  ————————————————
 --  |   Register   |
@@ -217,11 +235,11 @@ lvim.builtin.treesitter.rainbow = {
   enable = true,
   colors = {
     "Gold",
-    "LawnGreen",
+    "Orchid",
     "DodgerBlue",
     -- "Cornsilk",
     -- "Salmon",
-    -- "Orchid",
+    -- "LawnGreen",
   },
   disable = { "html" },
 }
@@ -231,8 +249,8 @@ lvim.builtin.treesitter.rainbow.extended_mode = true
 -- |   LSP settings   |
 -- ————————————————————
 -- ---@usage disable automatic installation of servers
-lvim.lsp.automatic_servers_installation = true
-lvim.lsp.diagnostics.virtual_text = true
+lvim.lsp.automatic_servers_installation = false
+lvim.lsp.diagnostics.virtual_text = false
 -- require'lspconfig'.gopls.setup{}
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
@@ -321,15 +339,17 @@ lvim.lsp.diagnostics.virtual_text = true
 lvim.plugins = {
     -- A clean, dark vim colorscheme
     {"folke/tokyonight.nvim"},
+    -- Gruvbox Material is a modified version of Gruvbox, the contrast is adjusted to be softer in order to protect developers' eyes.
+    {'sainnhe/gruvbox-material'},
     -- Rainbow parentheses for neovim using tree-sitter
     {"p00f/nvim-ts-rainbow"},
-    -- {
-    --   "windwp/nvim-s-autotag",
-    --    event = "InsertEnter",
-    --    config = function()
-    --      require("nvim-ts-autotag").setup()
-    --    end,
-    -- },
+    {
+      "windwp/nvim-ts-autotag",
+       event = "InsertEnter",
+       config = function()
+         require("nvim-ts-autotag").setup()
+       end,
+    },
     -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
     {
       "sindrets/diffview.nvim",
@@ -402,5 +422,6 @@ lvim.plugins = {
 lvim.autocommands.custom_groups = {
   { "BufWinEnter", "gitcommit", "setlocal spell" },
    -- On entering insert mode in any file, scroll the window so the cursor line is centered
-  { "InsertEnter", "*", ":normal zz" },
+  -- { "InsertEnter", "*", ":normal zz" },
 }
+
