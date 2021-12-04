@@ -8,9 +8,13 @@ require'nvim-tree'.setup {
   -- will not open on setup if the filetype is in this list
   ignore_ft_on_setup  = { "startify", "dashboard" },
   -- closes neovim automatically when the tree is the last **WINDOW** in the view
-  auto_close          = true,
+  auto_close          = false,
   -- opens the tree when changing/opening a new tab if the tree wasn't previously opened
   open_on_tab         = true,
+  -- hijack the cursor in the tree to put it at the start of the filename
+  hijack_cursor       = true,
+  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
+  update_cwd          = true,
 
   -- hijacks new directory buffers when they are opened.
   update_to_buf_dir   = {
@@ -19,10 +23,6 @@ require'nvim-tree'.setup {
     -- allow to open the tree if it was previously closed
     auto_open = true,
   },
-  -- hijack the cursor in the tree to put it at the start of the filename
-  hijack_cursor       = true,
-  -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
-  update_cwd          = true,
   -- show lsp diagnostics in the signcolumn
   diagnostics = {
     enable = false,
@@ -51,7 +51,11 @@ require'nvim-tree'.setup {
     -- the command arguments as a list
     args = {}
   },
-
+  git = {
+    enable = true,
+    ignore = true,
+    timeout = 500,
+  },
   view = {
     -- width of the window, can be either a number (columns) or a string in `%`, for left or right side placement
     width = 35,

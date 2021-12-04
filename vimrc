@@ -30,8 +30,6 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'alvan/vim-closetag'
     " gruvbox skins
     Plug 'sainnhe/gruvbox-material'
-    " A clean, dark vim colorscheme
-    Plug 'ghifarit53/tokyonight-vim'
     " Git wrapper
     Plug 'tpope/vim-fugitive'
     " Comment stuff out. Use gcc to comment out a line (takes a count), gc to comment out the target of a motion
@@ -346,11 +344,13 @@ set cursorline  "highlight current line
 set wildmenu   "visual autocomplete for command menu
 set wildmode=full
 set lazyredraw  "redraw only when we need to
-set timeoutlen=500  " By default timeoutlen is 1000 ms"
+set timeoutlen=250  " By default timeoutlen is 1000 ms"
 set showmatch  "highlight matching [{()}]
 set autowrite
 set redrawtime=10000
 set synmaxcol=180
+set scrolloff=10
+set sidescrolloff=8
 set re=1
 " Change how vim represents characters on the screen
 set encoding=utf-8
@@ -374,6 +374,7 @@ set softtabstop=2   " Sets the number of columns for a TAB.
 set expandtab   " On pressing tab, insert 4 spaces
 set shiftround " Shift to the next round tab stop.
 set autoindent " Auto indent
+set smartindent " make indenting smarter again
 
 
 " —————————— Vim's Built-in for Autocompleting words ——————————
@@ -412,11 +413,8 @@ set foldexpr=nvim_treesitter#foldexpr()
 " |   New movement keymap   |
 " ———————————————————————————
 inoremap hh <ESC>
+inoremap jk <ESC>
 inoremap <A-c> <ESC> ""
-noremap ; l
-noremap l k
-noremap k j
-noremap j h
 
 " ————————————————————————
 " |   Utilize Shortcut   |
@@ -429,6 +427,14 @@ nnoremap E $
 " New line in normal mode and back
 map <Enter> o<ESC>
 map <S-Enter> O<ESC>
+" Copy here until the end line
+nnoremap Y y$
+nnoremap J mzJ`z
+" Undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
 
 " —————————————————————
 " |   Mouse enabled   |
@@ -455,10 +461,10 @@ au FocusGained,BufEnter * :checktime
 " ——————————————————————————————————————————
 " |   Move lines up/down in varios modes   |
 " ——————————————————————————————————————————
-nnoremap <C-Down> :m .+1<CR>==
-nnoremap <C-Up> :m .-2<CR>==
-vnoremap <C-Down> :m '>+1<CR>gv=gv
-vnoremap <C-Up> :m '<-2<CR>gv=gv
+inoremap <C-j> :m .+1<CR>==
+inoremap <C-k> :m .-2<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " ————————————————
 " |   Terminal   |
@@ -487,12 +493,6 @@ let g:gruvbox_material_diagnostic_line_highlight = 1
 let g:gruvbox_material_current_word = 'bold'
 let g:gruvbox_material_better_performance = 1
 colorscheme gruvbox-material
-" let g:tokyonight_style = 'night' " available: night, storm
-" let g:tokyonight_enable_italic = 1
-" let g:tokyonight_italic_functions = 1
-" let g:tokyonight_current_word = 'bold'
-" let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-" colorscheme tokyonight
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -512,8 +512,8 @@ set incsearch " Highlight while search
 noremap <silent> <leader><cr> :nohl<cr>
 
 " ▶ Keep search results at the center of screen
-nnoremap n nzz
-nnoremap N Nzz
+nnoremap n nzzzv
+nnoremap N Nzzzv
 nnoremap * *zz
 nnoremap # #zz
 
@@ -536,18 +536,17 @@ set clipboard=unnamedplus  " Copy to clipboard "+y
 " —————————————————
 " |   Nvim Tree   |
 " —————————————————
-nnoremap <A-b> :NvimTreeToggle<CR>
+nnoremap <leader>e :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <A-f> :NvimTreeFindFile<CR>
 
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-let g:nvim_tree_gitignore = 1 "0 by default
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
 let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
 let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
 let g:nvim_tree_disable_window_picker = 1 "0 by default, will disable the window picker.
+let g:nvim_tree_refresh_wait = 800 "1000 by default, control how often the tree can be refreshed, 1000 means the tree can be refresh once per 1000ms.
 let g:nvim_tree_window_picker_exclude = {
     \   'filetype': [
     \     'notify',
