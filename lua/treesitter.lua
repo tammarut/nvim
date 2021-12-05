@@ -23,5 +23,9 @@ require'nvim-treesitter.configs'.setup {
       -- "Salmon",
       -- "LawnGreen",
     },
-  }
+  },
+  autotag = {
+    enable = true,
+    disable = { "xml" },
+  },
 }

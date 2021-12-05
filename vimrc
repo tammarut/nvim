@@ -26,8 +26,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'maxmellon/vim-jsx-pretty'
     " TypeScript syntax
     Plug 'leafgarland/typescript-vim'
-    " Auto close (X)HTML tags
-    Plug 'alvan/vim-closetag'
+    " Use treesitter to auto close and auto rename html tag
+    Plug 'windwp/nvim-ts-autotag',
     " gruvbox skins
     Plug 'sainnhe/gruvbox-material'
     " Git wrapper
@@ -101,14 +101,6 @@ nmap <leader>gs :G<CR>
 nmap <leader>gf :diffget //2<CR>
 " Accept incoming changes(right pane)
 nmap <leader>gh :diffget //3<CR>
-
-
-" —————————————————————
-" |   vim-closetag   |
-" ————————————————————
-" filenames like *.xml, *.html, *.xhtml, ...
-" These are the file extensions where this plugin is enabled.
-let g:closetag_filenames = '*.html,*.js,*.jsx,*.tsx,*.md'
 
 
 " ——————————————————————————————————
@@ -347,6 +339,7 @@ set wildmenu   "visual autocomplete for command menu
 set wildmode=full
 set lazyredraw  "redraw only when we need to
 set timeoutlen=250  " By default timeoutlen is 1000 ms"
+set ttimeoutlen=100
 set showmatch  "highlight matching [{()}]
 set autowrite
 set redrawtime=10000
