@@ -16,6 +16,7 @@
     "typescriptreact",
     "go"
   ],
+  "coc.preferences.colorSupport": true,
   "tsserver.formatOnType": true,
   "languageserver": {
     "golang": {

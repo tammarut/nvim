@@ -61,11 +61,13 @@ call plug#begin('~/.config/nvim/autoload/plugged')
     Plug 'phaazon/hop.nvim'
     " Manage multiple terminal windows
     Plug 'akinsho/nvim-toggleterm.lua'
+    " WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible key bindings of the command you started typing
+    Plug 'folke/which-key.nvim'
 
 call plug#end()
 
-
-let g:mapleader = "\<Space>" " New map <leader> from \ → spacebar
+" »»—————— New <leader> keymap \ → spacebar ——————««
+let g:mapleader = "\<Space>"
 
 " —————————————————
 " |   telescope   |
@@ -421,12 +423,10 @@ inoremap <A-c> <ESC> ""
 " ————————————————————————
 " Save file by Ctrl-s
 nnoremap <C-s> :w<cr>
+nnoremap <leader>q :q<cr> 
 " Move to beginning/end of line
 nnoremap B ^
 nnoremap E $
-" New line in normal mode and back
-map <Enter> o<ESC>
-map <S-Enter> O<ESC>
 " Copy here until the end line
 nnoremap Y y$
 nnoremap J mzJ`z
@@ -450,10 +450,10 @@ nnoremap <C-k> <C-w><C-k>
 nnoremap <C-j> <C-w><C-j>
 
 " Use alt + hjkl to resize windows
-nnoremap <A-j> :resize -2<CR>
-nnoremap <A-k> :resize +2<CR>
-nnoremap <A-l> :vertical resize -2<CR>
-nnoremap <A-h> :vertical resize +2<CR>
+" nnoremap <A-j> :resize -2<CR>
+" nnoremap <A-k> :resize +2<CR>
+" nnoremap <A-l> :vertical resize -2<CR>
+" nnoremap <A-h> :vertical resize +2<CR>
 
 " Update a buffer's contents on focus if it changed outside of Vim.
 au FocusGained,BufEnter * :checktime
@@ -461,10 +461,10 @@ au FocusGained,BufEnter * :checktime
 " ——————————————————————————————————————————
 " |   Move lines up/down in varios modes   |
 " ——————————————————————————————————————————
-inoremap <C-j> :m .+1<CR>==
-inoremap <C-k> :m .-2<CR>==
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " ————————————————
 " |   Terminal   |
@@ -526,10 +526,10 @@ set path+=**
 " ————————————————————————
 let s:clip = '/mnt/c/Windows/System32/clip.exe'  " change this path according to your mount point
 if executable(s:clip)
-    augroup WSLYank
-        autocmd!
-        autocmd TextYankPost * if v:event.operator ==# 'y' | call system('cat |' . s:clip, @0) | endif
-    augroup END
+  augroup WSLYank
+    autocmd!
+    autocmd TextYankPost * if v:event.operator ==# 'y' | call system('cat |' . s:clip, @0) | endif
+  augroup END
 endif
 set clipboard=unnamedplus  " Copy to clipboard "+y
 
@@ -569,4 +569,5 @@ autocmd FileType netrw setl bufhidden=delete
 " e.g. if you change the order of buffers :bnext and :bprevious will not respect the custom ordering
 nnoremap <silent> <tab> :BufferLineCycleNext<CR>
 nnoremap <silent> <s-tab> :BufferLineCyclePrev<CR>
+" Close current Buffer without closing window
 nnoremap <silent> <leader>d :lclose<bar>b#<bar>bd #<CR>
