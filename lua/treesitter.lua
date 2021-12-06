@@ -3,7 +3,7 @@ require'nvim-treesitter.configs'.setup {
   ignore_install = { 'verilog' },
   highlight = {
     enable = true,              -- false will disable the whole extension
-    disable = { "c", "rust" },
+    disable = { "c", "rust" }, -- list of language that will be disabled
   },
   indent = {
     enable = true
