@@ -17,29 +17,27 @@ lvim.transparent_window = false
 lvim.debug = false
 vim.opt.relativenumber = true
 vim.opt.timeoutlen = 100 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.ttimeoutlen = 50
+vim.opt.updatetime = 250 -- faster completion
+vim.opt.redrawtime = 1500
 vim.opt.wrap = true
 
 
 -- ——————————————————————————
 -- |   ColorScheme (skin)   |
 -- ——————————————————————————
-lvim.colorscheme = "gruvbox-material"
+lvim.colorscheme = "onedarker"
 vim.g.gruvbox_material_background = "hard"
 vim.g.gruvbox_material_palette = "mix"
 vim.g.gruvbox_material_enable_italic = 1
 vim.g.gruvbox_material_better_performance = 1
 
--- vim.g.tokyonight_style = "storm"
--- vim.g.tokyonight_enable_italic = true
--- vim.g.tokyonight_sidebars = { "qf", "vista_kind", "terminal", "packer" }
--- vim.g.tokyonight_italic_functions = true
-
 -- ———————————————
 -- |   Folding   |
 -- ———————————————
 vim.opt.foldmethod = "indent"
-vim.opt.foldlevelstart = 99
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldlevelstart = 99
 
 -- ——————————————————
 -- |   Keymapping   |
@@ -57,9 +55,6 @@ lvim.keys.normal_mode["<S-Tab>"] = ":bprevious<CR>"
 -- Move to beginning/end of line
 lvim.keys.normal_mode["B"] = "^"
 lvim.keys.normal_mode["E"] = "$"
--- New line in normal mode and back above
-lvim.keys.normal_mode["<Enter>"] = "o<ESC>"
-lvim.keys.normal_mode["<S-Enter>"] = "O<ESC>"
 -- Copy here until the end line
 lvim.keys.normal_mode["Y"] = "y$"
 -- ▶ Keep search results at the center of screen
@@ -116,9 +111,6 @@ lvim.keys.visual_mode["d"] = [["_d]]
 lvim.builtin.which_key.mappings["gs"] = nil
 lvim.builtin.which_key.mappings["gs"] = { "<cmd>Neogit<CR>", "Neogit" }
 
--- —————————— GitUI ——————————
-lvim.builtin.terminal.execs[#lvim.builtin.terminal.execs+1] = {"gitui", "gg", "GitUI"}
-
 -- —————————— Trouble ——————————
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Trouble",
@@ -135,59 +127,28 @@ lvim.builtin.which_key.mappings["t"] = {
 lvim.builtin.which_key.mappings["h"] = nil
 lvim.builtin.which_key.mappings["<CR>"] = { "<cmd>nohl<CR>", "No Highlight" }
 
+-- —————————— Hop ——————————
+lvim.builtin.which_key.mappings["h"] = {
+  name = "+Hop",
+  w = { "<cmd>HopWord<cr>", "Hop Word" },
+  l = { "<cmd>HopLineStart<cr>", "Hop Line" },
+}
+
 --  —————————————————
 --  |   Dashboard   |
 --  —————————————————
 -- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.dashboard.active = true
+lvim.builtin.notify.active = true
 
 --  ————————————————
 --  |   Terminal   |
 --  ————————————————
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.shade_terminals = true
-lvim.builtin.terminal.on_config_done = function()
-  local Terminal = require("toggleterm.terminal").Terminal
-  local term = Terminal:new({
-    direction = 'float',
-    float_opts = {
-      width = function()
-        return vim.o.columns
-      end,
-      height = function(_term)
-        local height = math.ceil(math.min(vim.o.lines, math.max(20, vim.o.lines / 20)))
-        _term.float_opts.row = vim.o.lines - height
-        return height
-      end,
-      border = { "─", "─", "─", " ", "─", "─", "─", " " },
-      highlights = {
-        -- background = "NormalFloat",
-        border = "SpecialComment"
-      },
-      winblend = 7
-    },
-    close_on_exit = true
-  })
-  function _ToggleTerm()
-    term:toggle()
-  end
-
-  local gitui = Terminal:new({
-    cmd = 'gitui',
-    direction = 'float',
-    float_opts = {
-      width = function()
-        return vim.o.columns
-      end,
-      border = 'solid',
-    },
-    close_on_exit = true
-  })
-  function _ToggleGitUI()
-    gitui:toggle()
-  end
-end
+-- —————————— GitUI ——————————
+lvim.builtin.terminal.execs = { {"gitui", "<leader>gg", "GitUI"} }
 
 -- —————————————————
 -- |   Nvim Tree   |
@@ -337,8 +298,6 @@ lvim.lsp.diagnostics.virtual_text = false
 -- |   Additional Plugins   |
 -- ——————————————————————————
 lvim.plugins = {
-    -- A clean, dark vim colorscheme
-    {"folke/tokyonight.nvim"},
     -- Gruvbox Material is a modified version of Gruvbox, the contrast is adjusted to be softer in order to protect developers' eyes.
     {'sainnhe/gruvbox-material'},
     -- Rainbow parentheses for neovim using tree-sitter
@@ -420,7 +379,7 @@ lvim.plugins = {
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
-  { "BufWinEnter", "gitcommit", "setlocal spell" },
+  { "BufWinEnter", "gitcommit", ":setlocal spell" },
    -- On entering insert mode in any file, scroll the window so the cursor line is centered
   -- { "InsertEnter", "*", ":normal zz" },
 }
