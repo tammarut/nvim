@@ -21,7 +21,9 @@ vim.opt.ttimeoutlen = 50
 vim.opt.updatetime = 250 -- faster completion
 vim.opt.redrawtime = 1500
 vim.opt.wrap = true
-
+vim.opt.guifont = "FiraCode Nerd Font:h13"
+vim.opt.autoread = true
+-- vim.opt.confirm = true
 
 -- ——————————————————————————
 -- |   ColorScheme (skin)   |
@@ -89,12 +91,12 @@ lvim.keys.visual_mode["d"] = [["_d]]
 -- local _, actions = pcall(require, "telescope.actions")
 -- lvim.builtin.telescope.defaults.mappings = {
 --   -- for input mode
-  -- i = {
-  --   -- ["<C-j>"] = actions.move_selection_next,
-  --   -- ["<C-k>"] = actions.move_selection_previous,
-  --   ["<C-j>"] = actions.cycle_history_next,
-  --   ["<C-k>"] = actions.cycle_history_prev,
-  -- },
+-- i = {
+--   -- ["<C-j>"] = actions.move_selection_next,
+--   -- ["<C-k>"] = actions.move_selection_previous,
+--   ["<C-j>"] = actions.cycle_history_next,
+--   ["<C-k>"] = actions.cycle_history_prev,
+-- },
 --   -- for normal mode
 --   n = {
 --     ["<C-j>"] = actions.move_selection_next,
@@ -113,13 +115,13 @@ lvim.builtin.which_key.mappings["gs"] = { "<cmd>Neogit<CR>", "Neogit" }
 
 -- —————————— Trouble ——————————
 lvim.builtin.which_key.mappings["t"] = {
-  name = "+Trouble",
-  r = { "<cmd>Trouble lsp_references<cr>", "References" },
-  f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
-  d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
-  q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
-  l = { "<cmd>Trouble loclist<cr>", "LocationList" },
-  w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+	name = "+Trouble",
+	r = { "<cmd>Trouble lsp_references<cr>", "References" },
+	f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+	d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+	q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+	l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+	w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
 }
 
 -- —————————— Search (highlight) ——————————
@@ -129,9 +131,9 @@ lvim.builtin.which_key.mappings["<CR>"] = { "<cmd>nohl<CR>", "No Highlight" }
 
 -- —————————— Hop ——————————
 lvim.builtin.which_key.mappings["h"] = {
-  name = "+Hop",
-  w = { "<cmd>HopWord<cr>", "Hop Word" },
-  l = { "<cmd>HopLineStart<cr>", "Hop Line" },
+	name = "+Hop",
+	w = { "<cmd>HopWord<cr>", "Hop Word" },
+	l = { "<cmd>HopLineStart<cr>", "Hop Line" },
 }
 
 --  —————————————————
@@ -148,7 +150,7 @@ lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.terminal.shade_terminals = true
 -- —————————— GitUI ——————————
-lvim.builtin.terminal.execs = { {"gitui", "<leader>gg", "GitUI"} }
+lvim.builtin.terminal.execs = { { "gitui", "<leader>gg", "GitUI" } }
 
 -- —————————————————
 -- |   Nvim Tree   |
@@ -168,17 +170,17 @@ vim.g.nvim_tree_indent_markers = 1
 lvim.builtin.gitsigns.opts.signcolumn = true
 lvim.builtin.gitsigns.opts.word_diff = true
 lvim.builtin.gitsigns.opts.keymaps = {
-  ['n ]c'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-  ['n [c'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+	["n ]c"] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
+	["n [c"] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
 }
 lvim.builtin.gitsigns.opts.current_line_blame = true
 lvim.builtin.gitsigns.opts.current_line_blame_opts = {
-  virt_text = true,
-  virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
-  delay = 1000,
+	virt_text = true,
+	virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+	delay = 1000,
 }
 lvim.builtin.gitsigns.opts.current_line_blame_formatter_opts = {
-  relative_time = true
+	relative_time = true,
 }
 
 -- ——————————————————
@@ -189,20 +191,20 @@ lvim.builtin.treesitter.ensure_installed = "maintained"
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 lvim.builtin.treesitter.autotag = {
-  enable = true,
-  disable = { "xml" },
+	enable = true,
+	disable = { "xml" },
 }
 lvim.builtin.treesitter.rainbow = {
-  enable = true,
-  colors = {
-    "Gold",
-    "Orchid",
-    "DodgerBlue",
-    -- "Cornsilk",
-    -- "Salmon",
-    -- "LawnGreen",
-  },
-  disable = { "html" },
+	enable = true,
+	colors = {
+		"Gold",
+		"Orchid",
+		"DodgerBlue",
+		-- "Cornsilk",
+		-- "Salmon",
+		-- "LawnGreen",
+	},
+	disable = { "html" },
 }
 lvim.builtin.treesitter.rainbow.extended_mode = true
 
@@ -298,89 +300,87 @@ lvim.lsp.diagnostics.virtual_text = false
 -- |   Additional Plugins   |
 -- ——————————————————————————
 lvim.plugins = {
-    -- Gruvbox Material is a modified version of Gruvbox, the contrast is adjusted to be softer in order to protect developers' eyes.
-    {'sainnhe/gruvbox-material'},
-    -- Rainbow parentheses for neovim using tree-sitter
-    {"p00f/nvim-ts-rainbow"},
-    {
-      "windwp/nvim-ts-autotag",
-       event = "InsertEnter",
-       config = function()
-         require("nvim-ts-autotag").setup()
-       end,
-    },
-    -- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
-    {
-      "sindrets/diffview.nvim",
-       event = "BufRead",
-    },
-    -- A work-in-progress Magit clone for Neovim that is geared toward the Vim philosophy.
-    {
-      "TimUntersberger/neogit",
-      config = function ()
-        local neogit = require("neogit")
-        neogit.setup {
-          integrations = { diffview = true }
-        }
-      end
-    },
-    -- 🚦A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
-    {
-      "folke/trouble.nvim",
-      cmd = "TroubleToggle",
-    },
-    -- Hop is an EasyMotion-like plugin allowing you to jump anywhere in a document with as few keystrokes as possible
-    {
-      "phaazon/hop.nvim",
-      event = "BufRead",
-      config = function()
-        require("user.hop").config()
-      end,
-    },
-    -- Surroundings: parentheses, brackets, quotes, XML tags, and more
-    {
-      "tpope/vim-surround",
-      keys = {"c", "d", "y"}
-    },
-    -- Indent guides for Neovim(Lua)
-    {
-      "lukas-reineke/indent-blankline.nvim",
-      event = "BufRead",
-      config = function()
-        require("user.indent-line").config()
-      end
-    },
-    -- Smooth scrolling neovim plugin written in .lua
-    {
-      "karb94/neoscroll.nvim",
-      event = "WinScrolled",
-      config = function()
-       require("user.neoscroll").config()
-      end
-    },
-    {
-      "tzachar/cmp-tabnine",
-      run = "./install.sh",
-      requires = "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      config = function()
-        local tabnine = require "cmp_tabnine.config"
-        tabnine:setup {
-          max_lines = 1000,
-          max_num_results = 20,
-          sort = true,
-          run_on_every_keystroke = true,
-          snippet_placeholder = '..'
-        }
-      end,
-
-    },
+	-- Gruvbox Material is a modified version of Gruvbox, the contrast is adjusted to be softer in order to protect developers' eyes.
+	{ "sainnhe/gruvbox-material" },
+	-- Rainbow parentheses for neovim using tree-sitter
+	{ "p00f/nvim-ts-rainbow" },
+	{
+		"windwp/nvim-ts-autotag",
+		event = "InsertEnter",
+		config = function()
+			require("nvim-ts-autotag").setup()
+		end,
+	},
+	-- Single tabpage interface for easily cycling through diffs for all modified files for any git rev
+	{
+		"sindrets/diffview.nvim",
+		event = "BufRead",
+	},
+	-- A work-in-progress Magit clone for Neovim that is geared toward the Vim philosophy.
+	{
+		"TimUntersberger/neogit",
+		config = function()
+			local neogit = require("neogit")
+			neogit.setup({
+				integrations = { diffview = true },
+			})
+		end,
+	},
+	-- 🚦A pretty diagnostics, references, telescope results, quickfix and location list to help you solve all the trouble your code is causing.
+	{
+		"folke/trouble.nvim",
+		cmd = "TroubleToggle",
+	},
+	-- Hop is an EasyMotion-like plugin allowing you to jump anywhere in a document with as few keystrokes as possible
+	{
+		"phaazon/hop.nvim",
+		event = "BufRead",
+		config = function()
+			require("user.hop").config()
+		end,
+	},
+	-- Surroundings: parentheses, brackets, quotes, XML tags, and more
+	{
+		"tpope/vim-surround",
+		keys = { "c", "d", "y" },
+	},
+	-- Indent guides for Neovim(Lua)
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		event = "BufRead",
+		config = function()
+			require("user.indent-line").config()
+		end,
+	},
+	-- Smooth scrolling neovim plugin written in .lua
+	{
+		"karb94/neoscroll.nvim",
+		event = "WinScrolled",
+		config = function()
+			require("user.neoscroll").config()
+		end,
+	},
+	{
+		"tzachar/cmp-tabnine",
+		run = "./install.sh",
+		requires = "hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		config = function()
+			local tabnine = require("cmp_tabnine.config")
+			tabnine:setup({
+				max_lines = 1000,
+				max_num_results = 20,
+				sort = true,
+				run_on_every_keystroke = true,
+				snippet_placeholder = "..",
+			})
+		end,
+	},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 lvim.autocommands.custom_groups = {
-  { "BufWinEnter", "gitcommit", ":setlocal spell" },
-   -- On entering insert mode in any file, scroll the window so the cursor line is centered
-  -- { "InsertEnter", "*", ":normal zz" },
+	{ "BufWinEnter", "gitcommit", ":setlocal spell" },
+	-- On entering insert mode in any file, scroll the window so the cursor line is centered
+	-- { "InsertEnter", "*", ":normal zz" },
 }
-
