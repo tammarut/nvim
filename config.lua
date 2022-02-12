@@ -12,18 +12,19 @@ an executable
 -- ————————————————
 lvim.log.level = "warn"
 lvim.line_wrap_cursor_movement = false
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.transparent_window = false
 lvim.debug = false
 vim.opt.relativenumber = true
-vim.opt.timeoutlen = 100 -- time to wait for a mapped sequence to complete (in milliseconds)
+vim.opt.timeoutlen = 150 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.ttimeoutlen = 50
 vim.opt.updatetime = 250 -- faster completion
 vim.opt.redrawtime = 1500
 vim.opt.wrap = true
 vim.opt.guifont = "FiraCode Nerd Font:h13"
+vim.opt.fillchars = "vert:▕"
 vim.opt.autoread = true
--- vim.opt.confirm = true
+vim.opt.confirm = true
 
 -- ——————————————————————————
 -- |   ColorScheme (skin)   |
@@ -214,6 +215,7 @@ lvim.builtin.treesitter.rainbow.extended_mode = true
 -- ---@usage disable automatic installation of servers
 lvim.lsp.automatic_servers_installation = false
 lvim.lsp.diagnostics.virtual_text = false
+lvim.lsp.diagnostics.update_in_insert = true
 -- require'lspconfig'.gopls.setup{}
 -- ---@usage Select which servers should be configured manually. Requires `:LvimCacheRest` to take effect.
 -- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
@@ -322,6 +324,8 @@ lvim.plugins = {
 		config = function()
 			local neogit = require("neogit")
 			neogit.setup({
+         -- Change the default way of opening neogit
+        kind = "split",
 				integrations = { diffview = true },
 			})
 		end,
@@ -376,6 +380,12 @@ lvim.plugins = {
 			})
 		end,
 	},
+  {
+    "ray-x/lsp_signature.nvim",
+    config = function()
+      require("user.lsp_signature").config()
+    end,
+  },
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
@@ -384,3 +394,4 @@ lvim.autocommands.custom_groups = {
 	-- On entering insert mode in any file, scroll the window so the cursor line is centered
 	-- { "InsertEnter", "*", ":normal zz" },
 }
+
