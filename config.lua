@@ -160,10 +160,9 @@ lvim.keys.normal_mode["<A-f>"] = ":NvimTreeFindFile<cr>"
 lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.setup.hijack_netrw = 1
 lvim.builtin.nvimtree.setup.open_on_setup = 1
-lvim.builtin.nvimtree.hide_dotfiles = 0
 lvim.builtin.nvimtree.show_icons.git = 1
 lvim.builtin.nvimtree.setup.view.width = 35
-vim.g.nvim_tree_indent_markers = 1
+lvim.builtin.nvimtree.indent_markers = 1
 
 -- ————————————————
 -- |   GitSigns   |
@@ -324,8 +323,8 @@ lvim.plugins = {
 		config = function()
 			local neogit = require("neogit")
 			neogit.setup({
-         -- Change the default way of opening neogit
-        kind = "split",
+				-- Change the default way of opening neogit
+				kind = "split",
 				integrations = { diffview = true },
 			})
 		end,
@@ -380,12 +379,12 @@ lvim.plugins = {
 			})
 		end,
 	},
-  {
-    "ray-x/lsp_signature.nvim",
-    config = function()
-      require("user.lsp_signature").config()
-    end,
-  },
+	{
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("user.lsp_signature").config()
+		end,
+	},
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
